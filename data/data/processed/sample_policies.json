@@ -1,0 +1,1350 @@
+[
+  {
+    "policy_name": "CloudWatchOpenSearchDashboardsFullAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchOpenSearchDashboardsFullAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CloudWatchOpenSearchDashboardsIntegration",
+          "Effect": "Allow",
+          "Action": [
+            "logs:ListIntegrations",
+            "logs:GetIntegration",
+            "logs:DeleteIntegration",
+            "logs:PutIntegration",
+            "logs:DescribeLogGroups",
+            "opensearch:ApplicationAccessAll",
+            "iam:ListRoles",
+            "iam:ListUsers"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "CloudWatchLogsOpensearchReadAPIs",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:BatchGetCollection",
+            "aoss:BatchGetLifecyclePolicy",
+            "es:ListApplications"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsOpensearchCreateServiceLinkedAccess",
+          "Effect": "Allow",
+          "Action": [
+            "iam:CreateServiceLinkedRole"
+          ],
+          "Resource": "arn:aws:iam::*:role/aws-service-role/opensearchservice.amazonaws.com/AWSServiceRoleForAmazonOpenSearchService",
+          "Condition": {
+            "StringEquals": {
+              "iam:AWSServiceName": "opensearchservice.amazonaws.com",
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsObservabilityCreateServiceLinkedAccess",
+          "Effect": "Allow",
+          "Action": [
+            "iam:CreateServiceLinkedRole"
+          ],
+          "Resource": "arn:aws:iam::*:role/aws-service-role/observability.aoss.amazonaws.com/AWSServiceRoleForAmazonOpenSearchServerless",
+          "Condition": {
+            "StringEquals": {
+              "iam:AWSServiceName": "observability.aoss.amazonaws.com",
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsCollectionRequestAccess",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:CreateCollection"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:RequestTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ]
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "CloudWatchOpenSearchIntegration"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsApplicationRequestAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:CreateApplication"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:RequestTag/OpenSearchIntegration": [
+                "Dashboards"
+              ]
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "OpenSearchIntegration"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsCollectionResourceAccess",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:DeleteCollection"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:ResourceTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsApplicationResourceAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:UpdateApplication",
+            "es:GetApplication"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:ResourceTag/OpenSearchIntegration": [
+                "Dashboards"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsCollectionPolicyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:CreateSecurityPolicy",
+            "aoss:CreateAccessPolicy",
+            "aoss:DeleteAccessPolicy",
+            "aoss:DeleteSecurityPolicy",
+            "aoss:GetAccessPolicy",
+            "aoss:GetSecurityPolicy"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "aoss:collection": "cloudwatch-logs-*",
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsAPIAccessAll",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:APIAccessAll"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "aoss:collection": "cloudwatch-logs-*"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsIndexPolicyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:CreateAccessPolicy",
+            "aoss:DeleteAccessPolicy",
+            "aoss:GetAccessPolicy",
+            "aoss:CreateLifecyclePolicy",
+            "aoss:DeleteLifecyclePolicy"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "aoss:index": "cloudwatch-logs-*",
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsDQSRequestQueryAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:AddDirectQueryDataSource"
+          ],
+          "Resource": "arn:aws:opensearch:*:*:datasource/cloudwatch_logs_*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:RequestTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ]
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "CloudWatchOpenSearchIntegration"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsStartDirectQueryAccess",
+          "Effect": "Allow",
+          "Action": [
+            "opensearch:StartDirectQuery",
+            "opensearch:GetDirectQuery"
+          ],
+          "Resource": "arn:aws:opensearch:*:*:datasource/cloudwatch_logs_*"
+        },
+        {
+          "Sid": "CloudWatchLogsDQSResourceQueryAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:GetDirectQueryDataSource",
+            "es:DeleteDirectQueryDataSource"
+          ],
+          "Resource": "arn:aws:opensearch:*:*:datasource/cloudwatch_logs_*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:ResourceTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ]
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsPassRoleAccess",
+          "Effect": "Allow",
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "iam:PassedToService": "directquery.opensearchservice.amazonaws.com",
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsAossTagsAccess",
+          "Effect": "Allow",
+          "Action": [
+            "aoss:TagResource"
+          ],
+          "Resource": "arn:aws:aoss:*:*:collection/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:CalledViaFirst": "logs.amazonaws.com",
+              "aws:ResourceTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ]
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "CloudWatchOpenSearchIntegration"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsEsApplicationTagsAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:AddTags"
+          ],
+          "Resource": "arn:aws:opensearch:*:*:application/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/OpenSearchIntegration": [
+                "Dashboards"
+              ],
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "OpenSearchIntegration"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchLogsEsDataSourceTagsAccess",
+          "Effect": "Allow",
+          "Action": [
+            "es:AddTags"
+          ],
+          "Resource": "arn:aws:opensearch:*:*:datasource/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/CloudWatchOpenSearchIntegration": [
+                "Dashboards"
+              ],
+              "aws:CalledViaFirst": "logs.amazonaws.com"
+            },
+            "ForAllValues:StringEquals": {
+              "aws:TagKeys": "CloudWatchOpenSearchIntegration"
+            }
+          }
+        }
+      ]
+    },
+    "actions_used": [
+      "opensearch:StartDirectQuery",
+      "aoss:BatchGetLifecyclePolicy",
+      "aoss:DeleteAccessPolicy",
+      "aoss:APIAccessAll",
+      "logs:DescribeLogGroups",
+      "aoss:GetSecurityPolicy",
+      "aoss:DeleteLifecyclePolicy",
+      "aoss:CreateSecurityPolicy",
+      "es:UpdateApplication",
+      "es:ListApplications",
+      "aoss:GetAccessPolicy",
+      "logs:ListIntegrations",
+      "es:DeleteDirectQueryDataSource",
+      "logs:PutIntegration",
+      "iam:ListUsers",
+      "iam:ListRoles",
+      "es:AddTags",
+      "aoss:BatchGetCollection",
+      "es:AddDirectQueryDataSource",
+      "logs:GetIntegration",
+      "aoss:DeleteSecurityPolicy",
+      "es:GetApplication",
+      "logs:DeleteIntegration",
+      "opensearch:GetDirectQuery",
+      "aoss:DeleteCollection",
+      "opensearch:ApplicationAccessAll",
+      "aoss:CreateLifecyclePolicy",
+      "iam:PassRole",
+      "es:GetDirectQueryDataSource",
+      "iam:CreateServiceLinkedRole",
+      "aoss:TagResource",
+      "aoss:CreateAccessPolicy",
+      "es:CreateApplication",
+      "aoss:CreateCollection"
+    ],
+    "relevance_score": 38,
+    "full_text": "AWS Managed Policy: CloudWatchOpenSearchDashboardsFullAccess. Actions granted: opensearch:StartDirectQuery, aoss:BatchGetLifecyclePolicy, aoss:DeleteAccessPolicy, aoss:APIAccessAll, logs:DescribeLogGroups, aoss:GetSecurityPolicy, aoss:DeleteLifecyclePolicy, aoss:CreateSecurityPolicy, es:UpdateApplication, es:ListApplications, aoss:GetAccessPolicy, logs:ListIntegrations, es:DeleteDirectQueryDataSource, logs:PutIntegration, iam:ListUsers, iam:ListRoles, es:AddTags, aoss:BatchGetCollection, es:AddDirectQueryDataSource, logs:GetIntegration."
+  },
+  {
+    "policy_name": "AmazonS3ObjectLambdaExecutionRolePolicy",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonS3ObjectLambdaExecutionRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3-object-lambda:WriteGetObjectResponse"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:PutLogEvents",
+      "s3-object-lambda:WriteGetObjectResponse",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: AmazonS3ObjectLambdaExecutionRolePolicy. Actions granted: logs:PutLogEvents, s3-object-lambda:WriteGetObjectResponse, logs:CreateLogGroup, logs:CreateLogStream."
+  },
+  {
+    "policy_name": "AmazonS3OutpostsFullAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonS3OutpostsFullAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "s3-outposts:*",
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "datasync:ListTasks",
+            "datasync:ListLocations",
+            "datasync:DescribeTask",
+            "datasync:DescribeLocation*"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeVpcs",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeNetworkInterfaces"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "outposts:ListOutposts",
+            "outposts:GetOutpost"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "datasync:DescribeLocation*",
+      "datasync:ListLocations",
+      "outposts:GetOutpost",
+      "datasync:ListTasks",
+      "ec2:DescribeSecurityGroups",
+      "datasync:DescribeTask",
+      "ec2:DescribeVpcs",
+      "outposts:ListOutposts",
+      "ec2:DescribeSubnets",
+      "s3-outposts:*",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: AmazonS3OutpostsFullAccess. Actions granted: datasync:DescribeLocation*, datasync:ListLocations, outposts:GetOutpost, datasync:ListTasks, ec2:DescribeSecurityGroups, datasync:DescribeTask, ec2:DescribeVpcs, outposts:ListOutposts, ec2:DescribeSubnets, s3-outposts:*, ec2:DescribeNetworkInterfaces."
+  },
+  {
+    "policy_name": "AmazonS3OutpostsReadOnlyAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonS3OutpostsReadOnlyAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3-outposts:Get*",
+            "s3-outposts:List*"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "datasync:ListTasks",
+            "datasync:ListLocations",
+            "datasync:DescribeTask",
+            "datasync:DescribeLocation*"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeVpcs",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeNetworkInterfaces"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "outposts:ListOutposts",
+            "outposts:GetOutpost"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "datasync:DescribeLocation*",
+      "s3-outposts:List*",
+      "datasync:ListLocations",
+      "outposts:GetOutpost",
+      "datasync:ListTasks",
+      "ec2:DescribeSecurityGroups",
+      "datasync:DescribeTask",
+      "ec2:DescribeVpcs",
+      "s3-outposts:Get*",
+      "outposts:ListOutposts",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: AmazonS3OutpostsReadOnlyAccess. Actions granted: datasync:DescribeLocation*, s3-outposts:List*, datasync:ListLocations, outposts:GetOutpost, datasync:ListTasks, ec2:DescribeSecurityGroups, datasync:DescribeTask, ec2:DescribeVpcs, s3-outposts:Get*, outposts:ListOutposts, ec2:DescribeSubnets, ec2:DescribeNetworkInterfaces."
+  },
+  {
+    "policy_name": "AWSLambdaDynamoDBExecutionRole",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaDynamoDBExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:DescribeStream",
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:ListStreams",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "dynamodb:GetRecords",
+      "logs:PutLogEvents",
+      "dynamodb:ListStreams",
+      "logs:CreateLogStream",
+      "dynamodb:GetShardIterator",
+      "dynamodb:DescribeStream",
+      "logs:CreateLogGroup"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: AWSLambdaDynamoDBExecutionRole. Actions granted: dynamodb:GetRecords, logs:PutLogEvents, dynamodb:ListStreams, logs:CreateLogStream, dynamodb:GetShardIterator, dynamodb:DescribeStream, logs:CreateLogGroup."
+  },
+  {
+    "policy_name": "AWSLambdaSQSQueueExecutionRole",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaSQSQueueExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "sqs:ReceiveMessage",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueAttributes",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "sqs:ReceiveMessage",
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "sqs:GetQueueAttributes",
+      "sqs:DeleteMessage",
+      "logs:CreateLogGroup"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: AWSLambdaSQSQueueExecutionRole. Actions granted: sqs:ReceiveMessage, logs:PutLogEvents, logs:CreateLogStream, sqs:GetQueueAttributes, sqs:DeleteMessage, logs:CreateLogGroup."
+  },
+  {
+    "policy_name": "CloudWatchLambdaApplicationSignalsExecutionRolePolicy",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLambdaApplicationSignalsExecutionRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CloudWatchApplicationSignalsXrayWritePermissions",
+          "Effect": "Allow",
+          "Action": [
+            "xray:PutTraceSegments"
+          ],
+          "Resource": [
+            "*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchApplicationSignalsLogGroupWritePermissions",
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/application-signals/data:*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:PutLogEvents",
+      "logs:CreateLogGroup",
+      "xray:PutTraceSegments",
+      "logs:CreateLogStream"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: CloudWatchLambdaApplicationSignalsExecutionRolePolicy. Actions granted: logs:PutLogEvents, logs:CreateLogGroup, xray:PutTraceSegments, logs:CreateLogStream."
+  },
+  {
+    "policy_name": "CloudWatchLambdaInsightsExecutionRolePolicy",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLambdaInsightsExecutionRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "logs:CreateLogGroup",
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda-insights:*"
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:PutLogEvents",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: CloudWatchLambdaInsightsExecutionRolePolicy. Actions granted: logs:PutLogEvents, logs:CreateLogGroup, logs:CreateLogStream."
+  },
+  {
+    "policy_name": "CloudWatchLogsFullAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLogsFullAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CloudWatchLogsFullAccess",
+          "Effect": "Allow",
+          "Action": [
+            "logs:*",
+            "cloudwatch:GenerateQuery",
+            "cloudwatch:GenerateQueryResultsSummary",
+            "observabilityadmin:GetS3TableIntegration",
+            "observabilityadmin:ListS3TableIntegrations",
+            "observabilityadmin:ListTelemetryPipelines"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:*",
+      "cloudwatch:GenerateQueryResultsSummary",
+      "observabilityadmin:ListS3TableIntegrations",
+      "observabilityadmin:ListTelemetryPipelines",
+      "cloudwatch:GenerateQuery",
+      "observabilityadmin:GetS3TableIntegration"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: CloudWatchLogsFullAccess. Actions granted: logs:*, cloudwatch:GenerateQueryResultsSummary, observabilityadmin:ListS3TableIntegrations, observabilityadmin:ListTelemetryPipelines, cloudwatch:GenerateQuery, observabilityadmin:GetS3TableIntegration."
+  },
+  {
+    "policy_name": "CloudWatchLogsReadOnlyAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLogsReadOnlyAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CloudWatchLogsReadOnlyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "logs:Describe*",
+            "logs:Get*",
+            "logs:List*",
+            "logs:StartQuery",
+            "logs:StopQuery",
+            "logs:TestMetricFilter",
+            "logs:FilterLogEvents",
+            "logs:StartLiveTail",
+            "logs:StopLiveTail",
+            "cloudwatch:GenerateQuery",
+            "cloudwatch:GenerateQueryResultsSummary",
+            "observabilityadmin:ListS3TableIntegrations",
+            "observabilityadmin:GetS3TableIntegration",
+            "observabilityadmin:ListTelemetryPipelines"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:StartLiveTail",
+      "logs:StopQuery",
+      "cloudwatch:GenerateQueryResultsSummary",
+      "logs:StopLiveTail",
+      "logs:List*",
+      "logs:Get*",
+      "logs:StartQuery",
+      "logs:Describe*",
+      "logs:TestMetricFilter",
+      "logs:FilterLogEvents",
+      "observabilityadmin:ListTelemetryPipelines",
+      "cloudwatch:GenerateQuery",
+      "observabilityadmin:GetS3TableIntegration",
+      "observabilityadmin:ListS3TableIntegrations"
+    ],
+    "relevance_score": 35,
+    "full_text": "AWS Managed Policy: CloudWatchLogsReadOnlyAccess. Actions granted: logs:StartLiveTail, logs:StopQuery, cloudwatch:GenerateQueryResultsSummary, logs:StopLiveTail, logs:List*, logs:Get*, logs:StartQuery, logs:Describe*, logs:TestMetricFilter, logs:FilterLogEvents, observabilityadmin:ListTelemetryPipelines, cloudwatch:GenerateQuery, observabilityadmin:GetS3TableIntegration, observabilityadmin:ListS3TableIntegrations."
+  },
+  {
+    "policy_name": "AWSLambdaManagedEC2ResourceOperator",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaManagedEC2ResourceOperator.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:RunInstances",
+            "ec2:CreateTags",
+            "ec2:AttachNetworkInterface"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:instance/*",
+            "arn:aws:ec2:*:*:network-interface/*",
+            "arn:aws:ec2:*:*:volume/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "ec2:ManagedResourceOperator": "scaler.lambda.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeAvailabilityZones",
+            "ec2:DescribeCapacityReservations",
+            "ec2:DescribeInstances",
+            "ec2:DescribeInstanceStatus",
+            "ec2:DescribeInstanceTypeOfferings",
+            "ec2:DescribeInstanceTypes",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:RunInstances",
+            "ec2:CreateNetworkInterface"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:subnet/*",
+            "arn:aws:ec2:*:*:security-group/*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:RunInstances"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:image/*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "ec2:Owner": "amazon"
+            }
+          }
+        }
+      ]
+    },
+    "actions_used": [
+      "ec2:DescribeInstanceStatus",
+      "ec2:CreateTags",
+      "ec2:AttachNetworkInterface",
+      "ec2:DescribeSecurityGroups",
+      "ec2:RunInstances",
+      "ec2:DescribeInstanceTypes",
+      "ec2:DescribeInstanceTypeOfferings",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeInstances",
+      "ec2:DescribeCapacityReservations",
+      "ec2:DescribeSubnets",
+      "ec2:CreateNetworkInterface"
+    ],
+    "relevance_score": 33,
+    "full_text": "AWS Managed Policy: AWSLambdaManagedEC2ResourceOperator. Actions granted: ec2:DescribeInstanceStatus, ec2:CreateTags, ec2:AttachNetworkInterface, ec2:DescribeSecurityGroups, ec2:RunInstances, ec2:DescribeInstanceTypes, ec2:DescribeInstanceTypeOfferings, ec2:DescribeAvailabilityZones, ec2:DescribeInstances, ec2:DescribeCapacityReservations, ec2:DescribeSubnets, ec2:CreateNetworkInterface."
+  },
+  {
+    "policy_name": "AWSSecretsManagerClientReadOnlyAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSSecretsManagerClientReadOnlyAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "SecretsManagerGetAndDescribeSecret",
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:DescribeSecret"
+          ],
+          "Resource": "arn:aws:secretsmanager:*:*:secret:*"
+        },
+        {
+          "Sid": "KMSDecryptKey",
+          "Effect": "Allow",
+          "Action": [
+            "kms:Decrypt"
+          ],
+          "Resource": "arn:aws:kms:*:*:key/*",
+          "Condition": {
+            "StringLike": {
+              "kms:EncryptionContext:SecretARN": "arn:aws:secretsmanager:*:*:secret:*",
+              "kms:ViaService": "secretsmanager.*.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "actions_used": [
+      "secretsmanager:DescribeSecret",
+      "kms:Decrypt",
+      "secretsmanager:GetSecretValue"
+    ],
+    "relevance_score": 32,
+    "full_text": "AWS Managed Policy: AWSSecretsManagerClientReadOnlyAccess. Actions granted: secretsmanager:DescribeSecret, kms:Decrypt, secretsmanager:GetSecretValue."
+  },
+  {
+    "policy_name": "AmazonSSMManagedEC2InstanceDefaultPolicy",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonSSMManagedEC2InstanceDefaultPolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowSSMAgentPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:DescribeAssociation",
+            "ssm:GetDeployablePatchSnapshotForInstance",
+            "ssm:GetDocument",
+            "ssm:DescribeDocument",
+            "ssm:GetManifest",
+            "ssm:ListAssociations",
+            "ssm:ListInstanceAssociations",
+            "ssm:PutInventory",
+            "ssm:PutComplianceItems",
+            "ssm:PutConfigurePackageResult",
+            "ssm:UpdateAssociationStatus",
+            "ssm:UpdateInstanceAssociationStatus",
+            "ssm:UpdateInstanceInformation"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowSSMChannelMessaging",
+          "Effect": "Allow",
+          "Action": [
+            "ssmmessages:CreateControlChannel",
+            "ssmmessages:CreateDataChannel",
+            "ssmmessages:OpenControlChannel",
+            "ssmmessages:OpenDataChannel"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowSSMLegacyMessaging",
+          "Effect": "Allow",
+          "Action": [
+            "ec2messages:AcknowledgeMessage",
+            "ec2messages:DeleteMessage",
+            "ec2messages:FailMessage",
+            "ec2messages:GetEndpoint",
+            "ec2messages:GetMessages",
+            "ec2messages:SendReply"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "ssm:ListInstanceAssociations",
+      "ssm:ListAssociations",
+      "ssm:DescribeDocument",
+      "ssm:UpdateInstanceInformation",
+      "ec2messages:GetEndpoint",
+      "ec2messages:AcknowledgeMessage",
+      "ssm:GetManifest",
+      "ssmmessages:OpenControlChannel",
+      "ssm:GetDeployablePatchSnapshotForInstance",
+      "ssm:UpdateAssociationStatus",
+      "ec2messages:FailMessage",
+      "ec2messages:SendReply",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:CreateControlChannel",
+      "ssm:PutConfigurePackageResult",
+      "ssmmessages:OpenDataChannel",
+      "ec2messages:DeleteMessage",
+      "ec2messages:GetMessages",
+      "ssm:PutInventory",
+      "ssm:PutComplianceItems",
+      "ssm:GetDocument",
+      "ssm:UpdateInstanceAssociationStatus",
+      "ssm:DescribeAssociation"
+    ],
+    "relevance_score": 30,
+    "full_text": "AWS Managed Policy: AmazonSSMManagedEC2InstanceDefaultPolicy. Actions granted: ssm:ListInstanceAssociations, ssm:ListAssociations, ssm:DescribeDocument, ssm:UpdateInstanceInformation, ec2messages:GetEndpoint, ec2messages:AcknowledgeMessage, ssm:GetManifest, ssmmessages:OpenControlChannel, ssm:GetDeployablePatchSnapshotForInstance, ssm:UpdateAssociationStatus, ec2messages:FailMessage, ec2messages:SendReply, ssmmessages:CreateDataChannel, ssmmessages:CreateControlChannel, ssm:PutConfigurePackageResult, ssmmessages:OpenDataChannel, ec2messages:DeleteMessage, ec2messages:GetMessages, ssm:PutInventory, ssm:PutComplianceItems."
+  },
+  {
+    "policy_name": "AWSLambdaInvocation-DynamoDB",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaInvocation-DynamoDB.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:DescribeStream",
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:ListStreams"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "dynamodb:GetRecords",
+      "dynamodb:ListStreams",
+      "dynamodb:GetShardIterator",
+      "dynamodb:DescribeStream",
+      "lambda:InvokeFunction"
+    ],
+    "relevance_score": 30,
+    "full_text": "AWS Managed Policy: AWSLambdaInvocation-DynamoDB. Actions granted: dynamodb:GetRecords, dynamodb:ListStreams, dynamodb:GetShardIterator, dynamodb:DescribeStream, lambda:InvokeFunction."
+  },
+  {
+    "policy_name": "CloudWatchActionsEC2Access",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchActionsEC2Access.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:Describe*",
+            "ec2:Describe*",
+            "ec2:RebootInstances",
+            "ec2:StopInstances",
+            "ec2:TerminateInstances"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "ec2:Describe*",
+      "cloudwatch:Describe*",
+      "ec2:TerminateInstances",
+      "ec2:RebootInstances",
+      "ec2:StopInstances"
+    ],
+    "relevance_score": 30,
+    "full_text": "AWS Managed Policy: CloudWatchActionsEC2Access. Actions granted: ec2:Describe*, cloudwatch:Describe*, ec2:TerminateInstances, ec2:RebootInstances, ec2:StopInstances."
+  },
+  {
+    "policy_name": "CloudWatchAutomaticDashboardsAccess",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchAutomaticDashboardsAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "autoscaling:DescribeAutoScalingGroups",
+            "cloudfront:GetDistribution",
+            "cloudfront:ListDistributions",
+            "dynamodb:DescribeTable",
+            "dynamodb:ListTables",
+            "ec2:DescribeInstances",
+            "ec2:DescribeVolumes",
+            "ecs:DescribeClusters",
+            "ecs:DescribeContainerInstances",
+            "ecs:ListClusters",
+            "ecs:ListContainerInstances",
+            "ecs:ListServices",
+            "elasticache:DescribeCacheClusters",
+            "elasticbeanstalk:DescribeEnvironments",
+            "elasticfilesystem:DescribeFileSystems",
+            "elasticloadbalancing:DescribeLoadBalancers",
+            "kinesis:DescribeStream",
+            "kinesis:ListStreams",
+            "lambda:GetFunction",
+            "lambda:ListFunctions",
+            "rds:DescribeDBClusters",
+            "rds:DescribeDBInstances",
+            "resource-groups:ListGroupResources",
+            "resource-groups:ListGroups",
+            "route53:GetHealthCheck",
+            "route53:ListHealthChecks",
+            "s3:ListAllMyBuckets",
+            "s3:ListBucket",
+            "sns:ListTopics",
+            "sqs:GetQueueAttributes",
+            "sqs:GetQueueUrl",
+            "sqs:ListQueues",
+            "synthetics:DescribeCanariesLastRun",
+            "tag:GetResources"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        },
+        {
+          "Action": [
+            "apigateway:GET"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:aws:apigateway:*::/restapis*"
+          ]
+        }
+      ]
+    },
+    "actions_used": [
+      "elasticache:DescribeCacheClusters",
+      "lambda:GetFunction",
+      "autoscaling:DescribeAutoScalingGroups",
+      "cloudfront:ListDistributions",
+      "cloudfront:GetDistribution",
+      "ecs:DescribeContainerInstances",
+      "lambda:ListFunctions",
+      "ecs:ListServices",
+      "elasticfilesystem:DescribeFileSystems",
+      "ec2:DescribeInstances",
+      "rds:DescribeDBClusters",
+      "kinesis:DescribeStream",
+      "sqs:GetQueueAttributes",
+      "resource-groups:ListGroupResources",
+      "sqs:ListQueues",
+      "route53:ListHealthChecks",
+      "elasticloadbalancing:DescribeLoadBalancers",
+      "s3:ListAllMyBuckets",
+      "sns:ListTopics",
+      "synthetics:DescribeCanariesLastRun",
+      "tag:GetResources",
+      "resource-groups:ListGroups",
+      "dynamodb:ListTables",
+      "dynamodb:DescribeTable",
+      "ecs:DescribeClusters",
+      "ecs:ListClusters",
+      "kinesis:ListStreams",
+      "apigateway:GET",
+      "elasticbeanstalk:DescribeEnvironments",
+      "ecs:ListContainerInstances",
+      "route53:GetHealthCheck",
+      "s3:ListBucket",
+      "sqs:GetQueueUrl",
+      "rds:DescribeDBInstances",
+      "ec2:DescribeVolumes"
+    ],
+    "relevance_score": 30,
+    "full_text": "AWS Managed Policy: CloudWatchAutomaticDashboardsAccess. Actions granted: elasticache:DescribeCacheClusters, lambda:GetFunction, autoscaling:DescribeAutoScalingGroups, cloudfront:ListDistributions, cloudfront:GetDistribution, ecs:DescribeContainerInstances, lambda:ListFunctions, ecs:ListServices, elasticfilesystem:DescribeFileSystems, ec2:DescribeInstances, rds:DescribeDBClusters, kinesis:DescribeStream, sqs:GetQueueAttributes, resource-groups:ListGroupResources, sqs:ListQueues, route53:ListHealthChecks, elasticloadbalancing:DescribeLoadBalancers, s3:ListAllMyBuckets, sns:ListTopics, synthetics:DescribeCanariesLastRun."
+  },
+  {
+    "policy_name": "DynamoDBCloudWatchContributorInsightsServiceRolePolicy",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./DynamoDBCloudWatchContributorInsightsServiceRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "cloudwatch:DeleteInsightRules",
+            "cloudwatch:PutInsightRule"
+          ],
+          "Effect": "Allow",
+          "Resource": "arn:aws:cloudwatch:*:*:insight-rule/DynamoDBContributorInsights*"
+        },
+        {
+          "Action": [
+            "cloudwatch:DescribeInsightRules"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "cloudwatch:PutInsightRule",
+      "cloudwatch:DescribeInsightRules",
+      "cloudwatch:DeleteInsightRules"
+    ],
+    "relevance_score": 30,
+    "full_text": "AWS Managed Policy: DynamoDBCloudWatchContributorInsightsServiceRolePolicy. Actions granted: cloudwatch:PutInsightRule, cloudwatch:DescribeInsightRules, cloudwatch:DeleteInsightRules."
+  },
+  {
+    "policy_name": "AmazonAPIGatewayPushToCloudWatchLogs",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonAPIGatewayPushToCloudWatchLogs.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:DescribeLogGroups",
+            "logs:DescribeLogStreams",
+            "logs:PutLogEvents",
+            "logs:GetLogEvents",
+            "logs:FilterLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:PutLogEvents",
+      "logs:GetLogEvents",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:FilterLogEvents",
+      "logs:CreateLogGroup"
+    ],
+    "relevance_score": 27,
+    "full_text": "AWS Managed Policy: AmazonAPIGatewayPushToCloudWatchLogs. Actions granted: logs:PutLogEvents, logs:GetLogEvents, logs:CreateLogStream, logs:DescribeLogGroups, logs:DescribeLogStreams, logs:FilterLogEvents, logs:CreateLogGroup."
+  },
+  {
+    "policy_name": "AmazonDMSCloudWatchLogsRole",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonDMSCloudWatchLogsRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowDescribeOnAllLogGroups",
+          "Effect": "Allow",
+          "Action": [
+            "logs:DescribeLogGroups"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Sid": "AllowDescribeOfAllLogStreamsOnDmsTasksLogGroup",
+          "Effect": "Allow",
+          "Action": [
+            "logs:DescribeLogStreams"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:dms-tasks-*",
+            "arn:aws:logs:*:*:log-group:dms-serverless-replication-*"
+          ]
+        },
+        {
+          "Sid": "AllowCreationOfDmsLogGroups",
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:dms-tasks-*",
+            "arn:aws:logs:*:*:log-group:dms-serverless-replication-*:log-stream:"
+          ]
+        },
+        {
+          "Sid": "AllowCreationOfDmsLogStream",
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogStream"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:dms-tasks-*:log-stream:dms-task-*",
+            "arn:aws:logs:*:*:log-group:dms-serverless-replication-*:log-stream:dms-serverless-*"
+          ]
+        },
+        {
+          "Sid": "AllowUploadOfLogEventsToDmsLogStream",
+          "Effect": "Allow",
+          "Action": [
+            "logs:PutLogEvents"
+          ],
+          "Resource": [
+            "arn:aws:logs:*:*:log-group:dms-tasks-*:log-stream:dms-task-*",
+            "arn:aws:logs:*:*:log-group:dms-serverless-replication-*:log-stream:dms-serverless-*"
+          ]
+        }
+      ]
+    },
+    "actions_used": [
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:CreateLogGroup"
+    ],
+    "relevance_score": 27,
+    "full_text": "AWS Managed Policy: AmazonDMSCloudWatchLogsRole. Actions granted: logs:PutLogEvents, logs:CreateLogStream, logs:DescribeLogGroups, logs:DescribeLogStreams, logs:CreateLogGroup."
+  },
+  {
+    "policy_name": "AmazonEC2RoleforSSM",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonEC2RoleforSSM.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ssm:DescribeAssociation",
+            "ssm:GetDeployablePatchSnapshotForInstance",
+            "ssm:GetDocument",
+            "ssm:DescribeDocument",
+            "ssm:GetManifest",
+            "ssm:GetParameters",
+            "ssm:ListAssociations",
+            "ssm:ListInstanceAssociations",
+            "ssm:PutInventory",
+            "ssm:PutComplianceItems",
+            "ssm:PutConfigurePackageResult",
+            "ssm:UpdateAssociationStatus",
+            "ssm:UpdateInstanceAssociationStatus",
+            "ssm:UpdateInstanceInformation"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ssmmessages:CreateControlChannel",
+            "ssmmessages:CreateDataChannel",
+            "ssmmessages:OpenControlChannel",
+            "ssmmessages:OpenDataChannel"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2messages:AcknowledgeMessage",
+            "ec2messages:DeleteMessage",
+            "ec2messages:FailMessage",
+            "ec2messages:GetEndpoint",
+            "ec2messages:GetMessages",
+            "ec2messages:SendReply"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:PutMetricData"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeInstanceStatus"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ds:CreateComputer",
+            "ds:DescribeDirectories"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:DescribeLogGroups",
+            "logs:DescribeLogStreams",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetBucketLocation",
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:GetEncryptionConfiguration",
+            "s3:AbortMultipartUpload",
+            "s3:ListMultipartUploadParts",
+            "s3:ListBucket",
+            "s3:ListBucketMultipartUploads"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions_used": [
+      "s3:AbortMultipartUpload",
+      "ssm:ListInstanceAssociations",
+      "logs:DescribeLogGroups",
+      "ssm:ListAssociations",
+      "ssm:DescribeDocument",
+      "ssm:UpdateInstanceInformation",
+      "ec2messages:GetEndpoint",
+      "ec2messages:AcknowledgeMessage",
+      "s3:GetBucketLocation",
+      "ssm:GetManifest",
+      "cloudwatch:PutMetricData",
+      "ssmmessages:OpenControlChannel",
+      "ssm:GetDeployablePatchSnapshotForInstance",
+      "s3:GetObject",
+      "ds:CreateComputer",
+      "ssm:UpdateAssociationStatus",
+      "ec2messages:FailMessage",
+      "ec2messages:SendReply",
+      "ec2:DescribeInstanceStatus",
+      "ssm:GetParameters",
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:CreateControlChannel",
+      "s3:ListMultipartUploadParts",
+      "logs:PutLogEvents",
+      "ssm:PutConfigurePackageResult",
+      "ssmmessages:OpenDataChannel",
+      "ec2messages:DeleteMessage",
+      "ec2messages:GetMessages",
+      "s3:ListBucketMultipartUploads",
+      "ssm:PutInventory",
+      "logs:DescribeLogStreams",
+      "ssm:PutComplianceItems",
+      "s3:GetEncryptionConfiguration",
+      "logs:CreateLogGroup",
+      "s3:PutObject",
+      "s3:ListBucket",
+      "ds:DescribeDirectories",
+      "logs:CreateLogStream",
+      "ssm:GetDocument",
+      "ssm:UpdateInstanceAssociationStatus",
+      "ssm:DescribeAssociation"
+    ],
+    "relevance_score": 27,
+    "full_text": "AWS Managed Policy: AmazonEC2RoleforSSM. Actions granted: s3:AbortMultipartUpload, ssm:ListInstanceAssociations, logs:DescribeLogGroups, ssm:ListAssociations, ssm:DescribeDocument, ssm:UpdateInstanceInformation, ec2messages:GetEndpoint, ec2messages:AcknowledgeMessage, s3:GetBucketLocation, ssm:GetManifest, cloudwatch:PutMetricData, ssmmessages:OpenControlChannel, ssm:GetDeployablePatchSnapshotForInstance, s3:GetObject, ds:CreateComputer, ssm:UpdateAssociationStatus, ec2messages:FailMessage, ec2messages:SendReply, ec2:DescribeInstanceStatus, ssm:GetParameters."
+  }
+]

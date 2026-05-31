@@ -1,0 +1,66 @@
+# ============================================================
+# aws-iam-rag configuration
+# All tunable hyperparameters in one place.
+# ============================================================
+
+# ── Data collection ──────────────────────────────────────────
+corpus:
+  n_managed_policies: 500         # total managed policies to scrape
+  n_eval_policies_held_out: 30    # held out from corpus, used for eval
+  n_github_gt_policies: 45        # ground truth from GitHub CloudFormation
+  target_services: 56             # number of AWS services in corpus
+
+# ── Chunking ──────────────────────────────────────────────────
+chunking:
+  strategy: entity_level          # one chunk per action / one per policy
+  # Note: no chunk_size or overlap — IAM actions are self-contained entities
+
+# ── Embedding ─────────────────────────────────────────────────
+embedding:
+  dense_model: voyage-code-3
+  dense_batch_size: 128
+  dense_dim: 1024                 # output dimension of voyage-code-3
+  sparse_model: naver/splade-v3
+  sparse_batch_size: 16
+  sparse_max_length: 512
+
+# ── Indexing ──────────────────────────────────────────────────
+indexing:
+  faiss_index_type: IndexFlatIP   # inner product (cosine after L2 norm)
+  bm25_k1: 1.5
+  bm25_b: 0.75
+
+# ── Retrieval ─────────────────────────────────────────────────
+retrieval:
+  # Decomposed dense — selected final strategy (best recall in ablation)
+  strategy: decomposed            # options: dense, sparse, bm25, rrf_hybrid, decomposed
+
+  # k values for non-decomposed strategies (k-parameter sweep optimal)
+  k_actions: 8
+  k_policies: 3
+
+  # k values for decomposed strategy (k-parameter sweep optimal)
+  k_action_per_subquery: 4
+  k_policy_per_subquery: 2
+
+  # RRF fusion weights (dense, sparse) — used only for rrf_hybrid
+  rrf_dense_weight: 0.7
+  rrf_sparse_weight: 0.3
+  rrf_k: 60                       # RRF smoothing constant
+
+  decomposer_model: gpt-4o
+
+  apply_companion_rules: true     # post-retrieval companion action augmentation
+
+# ── Generation ────────────────────────────────────────────────
+generation:
+  model: gpt-3.5-turbo            # or "llama-3.1-8b-instant" for Groq
+  max_tokens: 1000
+  temperature: 0
+
+# ── Evaluation ────────────────────────────────────────────────
+evaluation:
+  run_llm_judge: true             # Layer 4 — requires Anthropic API key
+  llm_judge_model: claude-sonnet-4-6
+  eval_set_size: 75
+  dev_set_size: 100               # used for retrieval ablation / k-sweep

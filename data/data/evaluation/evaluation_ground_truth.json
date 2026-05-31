@@ -1,0 +1,3938 @@
+[
+  {
+    "policy_name": "CodeBuildServiceRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/ecs-refarch-continuous-deployment/blob/master/templates/deployment-pipeline.yaml",
+    "repo": "awslabs/ecs-refarch-continuous-deployment",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:BatchGetImage",
+            "ecr:CompleteLayerUpload",
+            "ecr:GetAuthorizationToken",
+            "ecr:GetDownloadUrlForLayer",
+            "ecr:InitiateLayerUpload",
+            "ecr:PutImage",
+            "ecr:UploadLayerPart",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:CompleteLayerUpload",
+      "ecr:GetAuthorizationToken",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:PutObject"
+    ],
+    "services": [
+      "ecr",
+      "logs",
+      "s3"
+    ],
+    "action_count": 14,
+    "query": "Allow a build process to authenticate and manage container images in a private registry, including checking layer availability, uploading, and retrieving images. Enable the build process to write execution logs for monitoring purposes. Permit access to retrieve and store objects in a storage service for build artifacts and dependencies."
+  },
+  {
+    "policy_name": "CodePipelineServiceRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/ecs-refarch-continuous-deployment/blob/master/templates/deployment-pipeline.yaml",
+    "repo": "awslabs/ecs-refarch-continuous-deployment",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "codebuild:BatchGetBuilds",
+            "codebuild:StartBuild",
+            "ecs:DescribeServices",
+            "ecs:DescribeTaskDefinition",
+            "ecs:DescribeTasks",
+            "ecs:ListTasks",
+            "ecs:RegisterTaskDefinition",
+            "ecs:UpdateService",
+            "iam:PassRole",
+            "s3:GetBucketVersioning",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "codebuild:BatchGetBuilds",
+      "codebuild:StartBuild",
+      "ecs:DescribeServices",
+      "ecs:DescribeTaskDefinition",
+      "ecs:DescribeTasks",
+      "ecs:ListTasks",
+      "ecs:RegisterTaskDefinition",
+      "ecs:UpdateService",
+      "iam:PassRole",
+      "s3:GetBucketVersioning",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:PutObject"
+    ],
+    "services": [
+      "codebuild",
+      "ecs",
+      "iam",
+      "s3"
+    ],
+    "action_count": 13,
+    "query": "Allow a deployment pipeline to initiate and monitor build processes, manage and update container task definitions and services, retrieve and store objects in a storage bucket, and pass roles for execution."
+  },
+  {
+    "policy_name": "AmazonPaySigningLambdaExecutionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/retail-demo-store/blob/master/aws/cloudformation-templates/amazonpay.yaml",
+    "repo": "aws-samples/retail-demo-store",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "secretsmanager:GetSecretValue"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "secretsmanager:GetSecretValue"
+    ],
+    "services": [
+      "logs",
+      "secretsmanager"
+    ],
+    "action_count": 4,
+    "query": "Allow a function to retrieve sensitive configuration data from a secure storage service and write execution logs for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "AthenaRunnerPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-etl-orchestrator/blob/master/cloudformation/athenarunner-lambda.yaml",
+    "repo": "aws-samples/aws-etl-orchestrator",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "athena:GetNamedQuery",
+            "athena:GetQueryExecution",
+            "athena:StartQueryExecution",
+            "dynamodb:DeleteItem",
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:Query",
+            "dynamodb:UpdateItem",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "states:GetActivityTask",
+            "states:SendTaskFailure",
+            "states:SendTaskHeartbeat",
+            "states:SendTaskSuccess"
+          ],
+          "Resource": "arn:aws:dynamodb:${AWS::Region}:${AWS::AccountId}:table/${DDBTableName}"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "logs:CreateLogGroup",
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "states:SendTaskSuccess",
+            "states:SendTaskFailure",
+            "states:SendTaskHeartbeat",
+            "states:GetActivityTask"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "athena:StartQueryExecution",
+            "athena:GetQueryExecution",
+            "athena:GetNamedQuery"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "athena:GetNamedQuery",
+      "athena:GetQueryExecution",
+      "athena:StartQueryExecution",
+      "dynamodb:DeleteItem",
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "dynamodb:Query",
+      "dynamodb:UpdateItem",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "states:GetActivityTask",
+      "states:SendTaskFailure",
+      "states:SendTaskHeartbeat",
+      "states:SendTaskSuccess"
+    ],
+    "services": [
+      "athena",
+      "dynamodb",
+      "logs",
+      "states"
+    ],
+    "action_count": 15,
+    "query": "Allow an ETL orchestration process to execute and monitor data queries, manage data records in a database table, and handle task execution states. Additionally, enable the process to create and write execution logs for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "AWSGlueJobRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-etl-orchestrator/blob/master/cloudformation/glue-resources.yaml",
+    "repo": "aws-samples/aws-etl-orchestrator",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:DeleteObject",
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:PutObject"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 4,
+    "query": "Allow a data processing job to manage files in a storage system by retrieving, listing, uploading, and deleting objects."
+  },
+  {
+    "policy_name": "ApiGatewayInspectorProxyPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-samples/blob/main/apigw-ai-agents/bedrock-agents/aws-config/template.yaml",
+    "repo": "aws-samples/serverless-samples",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "apigateway:GET",
+            "apigateway:GetTags",
+            "apigatewayv2:GET",
+            "apigatewayv2:GetTags",
+            "bedrock:InvokeAgent",
+            "config:PutEvaluations",
+            "ses:SendEmail",
+            "tag:GetResources"
+          ],
+          "Resource": [
+            "arn:aws:bedrock:${AwsRegionForModelAccess}:${AWS::AccountId}:agent-alias/${AgentId}/${AgentAlias}",
+            {
+              "AgentId": {
+                "Fn::ImportValue": "${ApiInspectorAgentStackName}-ApiInspectorAgentId"
+              },
+              "AgentAlias": {
+                "Fn::ImportValue": "${ApiInspectorAgentStackName}-ApiInspectorAgentAliasId"
+              }
+            }
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ses:SendEmail"
+          ],
+          "Resource": "arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${SesEmailForNotifications}"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "apigateway:GET",
+            "apigatewayv2:GET",
+            "apigateway:GetTags",
+            "apigatewayv2:GetTags",
+            "tag:GetResources",
+            "config:PutEvaluations"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "apigateway:GET",
+      "apigateway:GetTags",
+      "apigatewayv2:GET",
+      "apigatewayv2:GetTags",
+      "bedrock:InvokeAgent",
+      "config:PutEvaluations",
+      "ses:SendEmail",
+      "tag:GetResources"
+    ],
+    "services": [
+      "apigateway",
+      "apigatewayv2",
+      "bedrock",
+      "config",
+      "ses",
+      "tag"
+    ],
+    "action_count": 8,
+    "query": "Allow an inspection process to retrieve and tag information from API endpoints, invoke specific agents for analysis, and evaluate configuration compliance. Additionally, enable the process to send notification emails and access resource tagging information."
+  },
+  {
+    "policy_name": "APIInspectorProxyPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-samples/blob/main/apigw-ai-agents/bedrock-agents/eda/template.yaml",
+    "repo": "aws-samples/serverless-samples",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "apigateway:GET",
+            "bedrock:InvokeAgent",
+            "ses:SendEmail"
+          ],
+          "Resource": [
+            "arn:aws:bedrock:${AwsRegionForModelAccess}:${AWS::AccountId}:agent-alias/${AgentId}/${AgentAlias}",
+            {
+              "AgentId": {
+                "Fn::ImportValue": "${APIInspectorAgentStackName}-ApiInspectorAgentId"
+              },
+              "AgentAlias": {
+                "Fn::ImportValue": "${APIInspectorAgentStackName}-ApiInspectorAgentAliasId"
+              }
+            }
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ses:SendEmail"
+          ],
+          "Resource": "arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/${SesEmailForNotifications}"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "apigateway:GET"
+          ],
+          "Resource": "arn:aws:apigateway:${AWS::Region}::/*/*"
+        }
+      ]
+    },
+    "actions": [
+      "apigateway:GET",
+      "bedrock:InvokeAgent",
+      "ses:SendEmail"
+    ],
+    "services": [
+      "apigateway",
+      "bedrock",
+      "ses"
+    ],
+    "action_count": 3,
+    "query": "Allow an API inspection proxy to retrieve data from an API management service, invoke a specific agent for processing tasks, and send notification emails through an email service."
+  },
+  {
+    "policy_name": "InvokeLambdaToolsPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-samples/blob/main/apigw-ai-agents/bedrock-agents/iac/api-inspector-agent.yaml",
+    "repo": "aws-samples/serverless-samples",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": {
+            "Fn::Sub": "${ToolsStackName}-APIAccountInspectorFunctionArn"
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "lambda:InvokeFunction",
+          "Resource": {
+            "Fn::Sub": "${ToolsStackName}-APIConfigurationRetrieverFunctionArn"
+          }
+        }
+      ]
+    },
+    "actions": [
+      "lambda:InvokeFunction"
+    ],
+    "services": [
+      "lambda"
+    ],
+    "action_count": 1,
+    "query": "Allow a toolset to trigger specific functions for inspecting account configurations and retrieving configuration details."
+  },
+  {
+    "policy_name": "PipelineRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-serverless-cicd-workshop/blob/master/resources/templates/pipeline.yaml",
+    "repo": "aws-samples/aws-serverless-cicd-workshop",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudformation:CreateChangeSet",
+            "cloudformation:DeleteChangeSet",
+            "cloudformation:DescribeChangeSet",
+            "cloudformation:DescribeStacks",
+            "cloudformation:ExecuteChangeSet",
+            "codebuild:BatchGetBuilds",
+            "codebuild:StartBuild",
+            "iam:PassRole",
+            "s3:DeleteObject",
+            "s3:GetBucketPolicy",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:ListBucket",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "cloudformation:CreateChangeSet",
+      "cloudformation:DeleteChangeSet",
+      "cloudformation:DescribeChangeSet",
+      "cloudformation:DescribeStacks",
+      "cloudformation:ExecuteChangeSet",
+      "codebuild:BatchGetBuilds",
+      "codebuild:StartBuild",
+      "iam:PassRole",
+      "s3:DeleteObject",
+      "s3:GetBucketPolicy",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:ListBucket",
+      "s3:PutObject"
+    ],
+    "services": [
+      "cloudformation",
+      "codebuild",
+      "iam",
+      "s3"
+    ],
+    "action_count": 14,
+    "query": "Allow a continuous integration and deployment pipeline to manage infrastructure changes by creating and executing change sets, initiate and monitor build processes, and manage artifacts in a storage bucket."
+  },
+  {
+    "policy_name": "CodeBuildPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-serverless-cicd-workshop/blob/master/resources/templates/pipeline.yaml",
+    "repo": "aws-samples/aws-serverless-cicd-workshop",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:ListBucket",
+            "s3:PutObject"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/*"
+          ]
+        },
+        {
+          "Action": [
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:${AWS::Partition}:s3:::${Artifacts}/*"
+          ]
+        },
+        {
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Effect": "Allow",
+          "Resource": [
+            "arn:${AWS::Partition}:s3:::${Artifacts}"
+          ]
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:ListBucket",
+      "s3:PutObject"
+    ],
+    "services": [
+      "logs",
+      "s3"
+    ],
+    "action_count": 7,
+    "query": "Allow a build process to create and manage logs for build execution, retrieve and store artifacts in a storage bucket, and list the contents of the bucket for artifact management."
+  },
+  {
+    "policy_name": "ConfigRESTApiRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-coffee/blob/main/00-baseCore/output.yaml",
+    "repo": "aws-samples/serverless-coffee",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:Query",
+            "dynamodb:Scan",
+            "dynamodb:UpdateItem"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:UpdateItem"
+    ],
+    "services": [
+      "dynamodb"
+    ],
+    "action_count": 4,
+    "query": "Allow a REST API to retrieve, query, scan, and update items in a database table for managing application data."
+  },
+  {
+    "policy_name": "RESTApiRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-coffee/blob/main/00-baseCore/output.yaml",
+    "repo": "aws-samples/serverless-coffee",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:Query",
+            "states:StartExecution"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "states:StartExecution"
+    ],
+    "services": [
+      "dynamodb",
+      "states"
+    ],
+    "action_count": 3,
+    "query": "Allow a REST API to retrieve data from a database table and initiate state machine executions for processing requests."
+  },
+  {
+    "policy_name": "RolePolicies",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-coffee/blob/main/00-baseCore/output.yaml",
+    "repo": "aws-samples/serverless-coffee",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:UpdateItem",
+            "events:PutEvents",
+            "states:ListExecutions"
+          ],
+          "Resource": {
+            "Fn::GetAtt": [
+              "ServerlesspressoEventBus",
+              "Arn"
+            ]
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "dynamodb:GetItem",
+          "Resource": {
+            "Fn::GetAtt": [
+              "ConfigTable",
+              "Arn"
+            ]
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "dynamodb:UpdateItem",
+          "Resource": {
+            "Fn::GetAtt": [
+              "ConfigTable",
+              "Arn"
+            ]
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "dynamodb:UpdateItem",
+          "Resource": {
+            "Fn::GetAtt": [
+              "CountingTable",
+              "Arn"
+            ]
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "states:ListExecutions",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:states:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":",
+                {
+                  "Ref": "AWS::AccountId"
+                },
+                ":stateMachine:",
+                "*"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:GetItem",
+      "dynamodb:UpdateItem",
+      "events:PutEvents",
+      "states:ListExecutions"
+    ],
+    "services": [
+      "dynamodb",
+      "events",
+      "states"
+    ],
+    "action_count": 4,
+    "query": "Allow a serverless application to retrieve and update configuration and counting data in a database table, send events to an event bus, and list executions of state machines for monitoring purposes."
+  },
+  {
+    "policy_name": "CodeBuildServiceRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/serverless-sinatra-sample/blob/master/pipeline-cfn.yaml",
+    "repo": "aws-samples/serverless-sinatra-sample",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:PutObject"
+    ],
+    "services": [
+      "logs",
+      "s3"
+    ],
+    "action_count": 6,
+    "query": "Allow a build process to create and manage log streams for recording build execution details and to retrieve and store objects in a storage bucket for build artifacts and dependencies."
+  },
+  {
+    "policy_name": "SPEKESecretsManagerPolicy",
+    "source": "github",
+    "url": "https://github.com/awslabs/speke-reference-server/blob/master/cloudformation/speke_reference.json",
+    "repo": "awslabs/speke-reference-server",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:CreateSecret",
+            "secretsmanager:GetRandomPassword",
+            "secretsmanager:GetSecretValue"
+          ],
+          "Resource": {
+            "Fn::Sub": "arn:aws:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:speke/*"
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:GetRandomPassword",
+            "secretsmanager:CreateSecret"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "secretsmanager:CreateSecret",
+      "secretsmanager:GetRandomPassword",
+      "secretsmanager:GetSecretValue"
+    ],
+    "services": [
+      "secretsmanager"
+    ],
+    "action_count": 3,
+    "query": "Allow a server to generate random passwords, create new secrets, and retrieve secret values for managing encryption keys securely."
+  },
+  {
+    "policy_name": "SPEKEServerKeyBucketPolicy",
+    "source": "github",
+    "url": "https://github.com/awslabs/speke-reference-server/blob/master/cloudformation/speke_reference.json",
+    "repo": "awslabs/speke-reference-server",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:PutObject",
+            "s3:PutObjectAcl"
+          ],
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                {
+                  "Fn::GetAtt": [
+                    "KeyBucket",
+                    "Arn"
+                  ]
+                },
+                "/*"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "actions": [
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 2,
+    "query": "Allow a server to upload objects and set access permissions for those objects in a storage bucket."
+  },
+  {
+    "policy_name": "ScalingRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/aws-multi-account-viewer/blob/master/Back-End/cloudformation/MainTemplate.yaml",
+    "repo": "awslabs/aws-multi-account-viewer",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:DeleteAlarms",
+            "cloudwatch:DescribeAlarms",
+            "cloudwatch:GetMetricStatistics",
+            "cloudwatch:PutMetricAlarm",
+            "cloudwatch:SetAlarmState",
+            "dynamodb:DescribeTable",
+            "dynamodb:UpdateTable"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DeleteAlarms",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:GetMetricStatistics",
+      "cloudwatch:PutMetricAlarm",
+      "cloudwatch:SetAlarmState",
+      "dynamodb:DescribeTable",
+      "dynamodb:UpdateTable"
+    ],
+    "services": [
+      "cloudwatch",
+      "dynamodb"
+    ],
+    "action_count": 7,
+    "query": "Allow a scaling management process to manage and configure monitoring alarms by creating, updating, describing, and deleting them, as well as to retrieve metric data. Additionally, allow the process to describe and update configurations of database tables for scaling purposes."
+  },
+  {
+    "policy_name": "TaskRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/amazon-ecs-fluent-bit-daemon-service/blob/mainline/ecs/ecs-fluent-bit-daemonset.yml",
+    "repo": "aws-samples/amazon-ecs-fluent-bit-daemon-service",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "firehose:PutRecordBatch",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:DescribeLogStreams",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "firehose:PutRecordBatch",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "firehose",
+      "logs"
+    ],
+    "action_count": 5,
+    "query": "Allow a logging service to batch send records to a data delivery stream and manage log groups and streams by creating, describing, and writing log events."
+  },
+  {
+    "policy_name": "ECSRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/fargate-game-servers/blob/master/CloudFormationResources/ecs-resources.yaml",
+    "repo": "aws-samples/fargate-game-servers",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:AttachNetworkInterface",
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DeleteNetworkInterfacePermission",
+            "ec2:Describe*",
+            "ec2:DetachNetworkInterface",
+            "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+            "elasticloadbalancing:DeregisterTargets",
+            "elasticloadbalancing:Describe*",
+            "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+            "elasticloadbalancing:RegisterTargets"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:AttachNetworkInterface",
+      "ec2:CreateNetworkInterface",
+      "ec2:CreateNetworkInterfacePermission",
+      "ec2:DeleteNetworkInterface",
+      "ec2:DeleteNetworkInterfacePermission",
+      "ec2:Describe*",
+      "ec2:DetachNetworkInterface",
+      "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+      "elasticloadbalancing:DeregisterTargets",
+      "elasticloadbalancing:Describe*",
+      "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+      "elasticloadbalancing:RegisterTargets"
+    ],
+    "services": [
+      "ec2",
+      "elasticloadbalancing"
+    ],
+    "action_count": 12,
+    "query": "Allow a container orchestration service to manage network interfaces for task networking and to register or deregister instances and targets with a load balancer for traffic distribution."
+  },
+  {
+    "policy_name": "ECSTaskExecutionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/fargate-game-servers/blob/master/CloudFormationResources/ecs-resources.yaml",
+    "repo": "aws-samples/fargate-game-servers",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:BatchGetImage",
+            "ecr:GetAuthorizationToken",
+            "ecr:GetDownloadUrlForLayer",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:BatchGetImage",
+      "ecr:GetAuthorizationToken",
+      "ecr:GetDownloadUrlForLayer",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "ecr",
+      "logs"
+    ],
+    "action_count": 6,
+    "query": "Allow a task execution environment to authenticate and pull container images from a private registry and write execution logs"
+  },
+  {
+    "policy_name": "ScheduledServiceIAMRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/amazon-aurora-postgres-monitoring/blob/master/deploy-non-vpc.yaml",
+    "repo": "awslabs/amazon-aurora-postgres-monitoring",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:PutMetricData",
+            "kms:Decrypt"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:PutMetricData",
+      "kms:Decrypt"
+    ],
+    "services": [
+      "cloudwatch",
+      "kms"
+    ],
+    "action_count": 2,
+    "query": "Allow a monitoring service to publish custom metrics for performance tracking and decrypt sensitive data required for processing."
+  },
+  {
+    "policy_name": "WebhookFunctionPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/webhooks/blob/main/receive-webhooks/template.yml",
+    "repo": "aws-samples/webhooks",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "kms:DescribeKey",
+            "kms:Encrypt",
+            "kms:GenerateDataKey",
+            "s3:PutObject",
+            "ssm:GetParameter"
+          ],
+          "Resource": "${Bucket.Arn}/${BucketPrefix}*",
+          "Condition": {
+            "ArnEquals": {
+              "lambda:SourceFunctionArn": "WebhookFunction.Arn"
+            }
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "kms:DescribeKey",
+            "kms:Encrypt",
+            "kms:GenerateDataKey"
+          ],
+          "Resource": "EncryptionKey.Arn"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:GetItem",
+            "dynamodb:PutItem"
+          ],
+          "Resource": "Table.Arn"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "ssm:GetParameter",
+          "Resource": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter${WebhookParameter}"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:GetItem",
+      "dynamodb:PutItem",
+      "kms:DescribeKey",
+      "kms:Encrypt",
+      "kms:GenerateDataKey",
+      "s3:PutObject",
+      "ssm:GetParameter"
+    ],
+    "services": [
+      "dynamodb",
+      "kms",
+      "s3",
+      "ssm"
+    ],
+    "action_count": 7,
+    "query": "Allow a webhook processing function to store and retrieve data in a database table, encrypt and manage encryption keys for secure data handling, upload processed data to a storage location, and access configuration parameters for operational settings."
+  },
+  {
+    "policy_name": "PipeRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/webhooks/blob/main/send-webhooks/template.yaml",
+    "repo": "aws-samples/webhooks",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:DescribeStream",
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:ListStreams",
+            "events:InvokeApiDestination",
+            "sqs:GetQueueAttributes",
+            "sqs:SendMessage"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:DescribeStream",
+      "dynamodb:GetRecords",
+      "dynamodb:GetShardIterator",
+      "dynamodb:ListStreams",
+      "events:InvokeApiDestination",
+      "sqs:GetQueueAttributes",
+      "sqs:SendMessage"
+    ],
+    "services": [
+      "dynamodb",
+      "events",
+      "sqs"
+    ],
+    "action_count": 7,
+    "query": "Allow a process to read from a database stream by describing the stream, retrieving records, and obtaining shard iterators. Enable the process to invoke an external API destination. Permit sending messages to a queue and retrieving its attributes."
+  },
+  {
+    "policy_name": "BuildRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "acm:ImportCertificate",
+            "ecr:BatchCheckLayerAvailability",
+            "ecr:CompleteLayerUpload",
+            "ecr:GetAuthorizationToken",
+            "ecr:InitiateLayerUpload",
+            "ecr:PutImage",
+            "ecr:UploadLayerPart",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "acm:ImportCertificate",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:CompleteLayerUpload",
+      "ecr:GetAuthorizationToken",
+      "ecr:InitiateLayerUpload",
+      "ecr:PutImage",
+      "ecr:UploadLayerPart",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "acm",
+      "ecr",
+      "logs"
+    ],
+    "action_count": 10,
+    "query": "Allow a build process to import security certificates, upload and manage container images in a private registry, and create and write execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "TaskExecutionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:GetSecretValue",
+            "ssm:GetParameters"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "secretsmanager:GetSecretValue",
+      "ssm:GetParameters"
+    ],
+    "services": [
+      "secretsmanager",
+      "ssm"
+    ],
+    "action_count": 2,
+    "query": "Allow a task execution process to retrieve sensitive configuration details and parameters from secure storage services for operational use"
+  },
+  {
+    "policy_name": "Orthanc1TaskRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "s3:GetObject",
+      "s3:ListBucket"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 2,
+    "query": "Allow read-only access to retrieve objects and list contents of a storage bucket"
+  },
+  {
+    "policy_name": "DeIdentifierTaskRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "rekognition:DetectText",
+            "s3:GetObject",
+            "sqs:DeleteMessage",
+            "sqs:ReceiveMessage"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "rekognition:DetectText",
+      "s3:GetObject",
+      "sqs:DeleteMessage",
+      "sqs:ReceiveMessage"
+    ],
+    "services": [
+      "rekognition",
+      "s3",
+      "sqs"
+    ],
+    "action_count": 4,
+    "query": "Allow a de-identification task to analyze images for text extraction, retrieve necessary data from a storage bucket, and manage message processing by consuming and deleting messages from a queue."
+  },
+  {
+    "policy_name": "WebsiteTaskRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:DescribeLogStreams",
+            "logs:PutLogEvents",
+            "s3:GetObject",
+            "sqs:SendMessage"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+      "s3:GetObject",
+      "sqs:SendMessage"
+    ],
+    "services": [
+      "logs",
+      "s3",
+      "sqs"
+    ],
+    "action_count": 6,
+    "query": "Allow a web application to create and manage log streams and write log events for monitoring purposes, retrieve objects from a storage bucket for data access, and send messages to a queue for asynchronous processing."
+  },
+  {
+    "policy_name": "WebsiteWorkerTaskRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/research-pacs-on-aws/blob/main/cfn-template/template.yaml",
+    "repo": "aws-samples/research-pacs-on-aws",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "sqs:ChangeMessageVisibility",
+            "sqs:DeleteMessage",
+            "sqs:ReceiveMessage"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "sqs:ChangeMessageVisibility",
+      "sqs:DeleteMessage",
+      "sqs:ReceiveMessage"
+    ],
+    "services": [
+      "sqs"
+    ],
+    "action_count": 3,
+    "query": "Allow a worker process to manage and process messages in a queue by receiving messages, changing their visibility, and deleting them after processing"
+  },
+  {
+    "policy_name": "ArchiverIAMRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/amazon-kinesis-archiver/blob/master/deploy.yaml",
+    "repo": "awslabs/amazon-kinesis-archiver",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamoDB:PutItem",
+            "dynamoDB:Query",
+            "dynamoDB:Scan",
+            "dynamoDB:UpdateItem",
+            "kinesis:DescribeStream",
+            "kinesis:GetRecords",
+            "kinesis:GetShardIterator",
+            "kinesis:ListStreams",
+            "kinesis:ListTagsForStream",
+            "kinesis:PutRecord",
+            "kinesis:PutRecords"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamoDB:PutItem",
+      "dynamoDB:Query",
+      "dynamoDB:Scan",
+      "dynamoDB:UpdateItem",
+      "kinesis:DescribeStream",
+      "kinesis:GetRecords",
+      "kinesis:GetShardIterator",
+      "kinesis:ListStreams",
+      "kinesis:ListTagsForStream",
+      "kinesis:PutRecord",
+      "kinesis:PutRecords"
+    ],
+    "services": [
+      "dynamodb",
+      "kinesis"
+    ],
+    "action_count": 11,
+    "query": "Allow an archiving process to read from and write to data streams, as well as manage and update records in a database table."
+  },
+  {
+    "policy_name": "StateMachinePolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/amazon-guardduty-automated-response-sample/blob/main/template.yml",
+    "repo": "aws-samples/amazon-guardduty-automated-response-sample",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "iam:PutRolePolicy",
+            "iam:PutUserPolicy",
+            "lambda:InvokeFunction",
+            "s3:PutBucketPublicAccessBlock",
+            "sns:Publish"
+          ],
+          "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "iam:PutUserPolicy",
+          "Resource": "arn:${AWS::Partition}:iam::${AWS::AccountId}:user/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "s3:PutBucketPublicAccessBlock",
+          "Resource": "arn:${AWS::Partition}:s3:::*",
+          "Condition": {
+            "StringEquals": {
+              "s3:ResourceAccount": "AWS::AccountId"
+            }
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": "lambda:InvokeFunction",
+          "Resource": "QuarantineFunction.Arn"
+        },
+        {
+          "Effect": "Allow",
+          "Action": "sns:Publish",
+          "Resource": "NotificationTopic"
+        }
+      ]
+    },
+    "actions": [
+      "iam:PutRolePolicy",
+      "iam:PutUserPolicy",
+      "lambda:InvokeFunction",
+      "s3:PutBucketPublicAccessBlock",
+      "sns:Publish"
+    ],
+    "services": [
+      "iam",
+      "lambda",
+      "s3",
+      "sns"
+    ],
+    "action_count": 5,
+    "query": "Allow a state machine to apply inline policies to roles and users for security configurations, invoke a function for automated response actions, enforce public access restrictions on storage buckets, and send notifications through a messaging service."
+  },
+  {
+    "policy_name": "LambdaExecutionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-integration-for-apache-guacamole/blob/main/scripts/vdi-automated-solution.yaml",
+    "repo": "aws-samples/aws-integration-for-apache-guacamole",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:CreateTags",
+            "ec2:DeleteTags",
+            "ec2:Describe*",
+            "kms:Get*",
+            "kms:List*",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "ssm:Describe*",
+            "ssm:Get*",
+            "ssm:List*"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:CreateTags",
+      "ec2:DeleteTags",
+      "ec2:Describe*",
+      "kms:Get*",
+      "kms:List*",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "ssm:Describe*",
+      "ssm:Get*",
+      "ssm:List*"
+    ],
+    "services": [
+      "ec2",
+      "kms",
+      "logs",
+      "ssm"
+    ],
+    "action_count": 11,
+    "query": "Allow a function to manage and retrieve metadata for virtual machine instances, access encryption key details, and manage execution logs. Additionally, enable the function to retrieve and list configuration parameters and system information."
+  },
+  {
+    "policy_name": "GroundStationAmazonMachineImageNameRetrievalLambdaRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/aws-groundstation-eos-pipeline/blob/main/cfn/aqua-rt-stps.yml",
+    "repo": "awslabs/aws-groundstation-eos-pipeline",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeImages",
+            "s3:GetObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:DescribeImages",
+      "s3:GetObject"
+    ],
+    "services": [
+      "ec2",
+      "s3"
+    ],
+    "action_count": 2,
+    "query": "Allow a function to retrieve information about machine images and access specific objects from a storage bucket"
+  },
+  {
+    "policy_name": "DataDeliveryServiceRole",
+    "source": "github",
+    "url": "https://github.com/awslabs/aws-groundstation-eos-pipeline/blob/main/cfn/aqua-rt-stps.yml",
+    "repo": "awslabs/aws-groundstation-eos-pipeline",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:CreateNetworkInterface",
+            "ec2:CreateNetworkInterfacePermission",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DeleteNetworkInterfacePermission",
+            "ec2:DescribeSecurityGroups",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeVpcs"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:CreateNetworkInterface",
+      "ec2:CreateNetworkInterfacePermission",
+      "ec2:DeleteNetworkInterface",
+      "ec2:DeleteNetworkInterfacePermission",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeVpcs"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "action_count": 7,
+    "query": "Allow a data delivery service to manage network interfaces and permissions, and to retrieve information about security groups, subnets, and virtual private networks for network configuration and management purposes."
+  },
+  {
+    "policy_name": "InstanceRoleS3Policy",
+    "source": "github",
+    "url": "https://github.com/awslabs/aws-groundstation-eos-pipeline/blob/main/cfn/aqua-rt-stps.yml",
+    "repo": "awslabs/aws-groundstation-eos-pipeline",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:PutObject",
+            "s3:PutObjectAcl"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "S3Bucket",
+                "/*"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:GetObject"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "space-solutions-",
+                "eu-west-1",
+                "/*"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "S3Bucket"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "space-solutions-",
+                "eu-west-1",
+                "/*"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "actions": [
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 4,
+    "query": "Allow an instance to retrieve, list, and store objects in a designated storage bucket, including setting access permissions on stored objects. Additionally, allow the instance to retrieve objects and list contents from a specific regional storage bucket."
+  },
+  {
+    "policy_name": "InstanceRoleS3Policy",
+    "source": "github",
+    "url": "https://github.com/awslabs/aws-groundstation-eos-pipeline/blob/main/cfn/ipopp-instance.yml",
+    "repo": "awslabs/aws-groundstation-eos-pipeline",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "s3:DeleteObject",
+            "s3:DeleteObjectVersion",
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:PutObject",
+            "s3:PutObjectAcl"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "S3Bucket",
+                "/*"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "S3Bucket"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:GetObject"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "space-solutions-",
+                "eu-west-1",
+                "/*"
+              ]
+            ]
+          }
+        },
+        {
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Effect": "Allow",
+          "Resource": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:aws:s3:::",
+                "space-solutions-",
+                "eu-west-1",
+                "/*"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    "actions": [
+      "s3:DeleteObject",
+      "s3:DeleteObjectVersion",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:PutObject",
+      "s3:PutObjectAcl"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 6,
+    "query": "Allow an instance to manage objects within a specific storage bucket, including listing contents, retrieving, uploading, and deleting objects, as well as setting access permissions on those objects. Additionally, allow the instance to list and retrieve objects from a secondary storage bucket."
+  },
+  {
+    "policy_name": "StepFunctionsRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/amazon-rekognition-custom-labels-a2i-automated-continuous-model-improvement/blob/main/rekonginition-a2i-automate-workflow.yml",
+    "repo": "aws-samples/amazon-rekognition-custom-labels-a2i-automated-continuous-model-improvement",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction",
+            "xray:GetSamplingRules",
+            "xray:GetSamplingTargets",
+            "xray:PutTelemetryRecords",
+            "xray:PutTraceSegments"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "lambda:InvokeFunction",
+      "xray:GetSamplingRules",
+      "xray:GetSamplingTargets",
+      "xray:PutTelemetryRecords",
+      "xray:PutTraceSegments"
+    ],
+    "services": [
+      "lambda",
+      "xray"
+    ],
+    "action_count": 5,
+    "query": "Allow a workflow orchestrator to trigger execution of serverless functions and collect distributed tracing data for monitoring and analysis purposes"
+  },
+  {
+    "policy_name": "FlowDefinitionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/amazon-rekognition-custom-labels-a2i-automated-continuous-model-improvement/blob/main/rekonginition-a2i-automate-workflow.yml",
+    "repo": "aws-samples/amazon-rekognition-custom-labels-a2i-automated-continuous-model-improvement",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:GetObject",
+            "s3:PutObject"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "s3:GetObject",
+      "s3:PutObject"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 2,
+    "query": "Allow a process to retrieve and store objects in a storage system for tasks related to automated continuous model improvement."
+  },
+  {
+    "policy_name": "LambdaRedshiftDataApiETLRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-lambda-redshift-event-driven-app/blob/main/event-driven-redshift-pipeline.yaml",
+    "repo": "aws-samples/aws-lambda-redshift-event-driven-app",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "redshift-data:DescribeStatement",
+            "redshift-data:ExecuteStatement",
+            "redshift-data:GetStatementResult",
+            "redshift-data:ListStatements",
+            "redshift:GetClusterCredentials",
+            "sns:Publish"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "redshift-data:DescribeStatement",
+      "redshift-data:ExecuteStatement",
+      "redshift-data:GetStatementResult",
+      "redshift-data:ListStatements",
+      "redshift:GetClusterCredentials",
+      "sns:Publish"
+    ],
+    "services": [
+      "redshift",
+      "redshift-data",
+      "sns"
+    ],
+    "action_count": 6,
+    "query": "Allow a data processing function to execute and manage SQL statements on a data warehouse, retrieve execution results, and obtain necessary credentials for cluster access. Additionally, enable the function to send notifications upon task completion or failure."
+  },
+  {
+    "policy_name": "SetupRedshiftObjectsLambdaRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/aws-lambda-redshift-event-driven-app/blob/main/event-driven-redshift-pipeline.yaml",
+    "repo": "aws-samples/aws-lambda-redshift-event-driven-app",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeAsync",
+            "lambda:InvokeFunction",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "lambda:InvokeAsync",
+      "lambda:InvokeFunction",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "lambda",
+      "logs"
+    ],
+    "action_count": 5,
+    "query": "Allow a function to invoke other functions asynchronously and synchronously, and to create and write execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "SftpAccessPolicy",
+    "source": "github",
+    "url": "https://github.com/aws-samples/simplified-serverless-b2b-application/blob/main/template.yaml",
+    "repo": "aws-samples/simplified-serverless-b2b-application",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:DeleteObject",
+            "s3:DeleteObjectVersion",
+            "s3:GetBucketLocation",
+            "s3:GetObject",
+            "s3:GetObjectVersion",
+            "s3:ListBucket",
+            "s3:PutObject"
+          ],
+          "Resource": "${SftpServerS3Bucket.Arn}/test/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket",
+            "s3:GetBucketLocation"
+          ],
+          "Resource": "SftpServerS3Bucket.Arn",
+          "Condition": {
+            "StringLike": {
+              "s3:prefix": "test/*"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "s3:DeleteObject",
+      "s3:DeleteObjectVersion",
+      "s3:GetBucketLocation",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "s3:ListBucket",
+      "s3:PutObject"
+    ],
+    "services": [
+      "s3"
+    ],
+    "action_count": 7,
+    "query": "Allow an SFTP server to manage files within a specific directory of a storage bucket, including listing, retrieving, uploading, and deleting objects, as well as accessing bucket location information."
+  },
+  {
+    "policy_name": "SingleQueueLambdaApiGatewayRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/simplified-serverless-b2b-application/blob/main/template.yaml",
+    "repo": "aws-samples/simplified-serverless-b2b-application",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "lambda:InvokeFunction",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "lambda",
+      "logs"
+    ],
+    "action_count": 4,
+    "query": "Allow an API gateway to trigger a function and enable the function to create and write execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "SingleQueueUploadLambdaRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/simplified-serverless-b2b-application/blob/main/template.yaml",
+    "repo": "aws-samples/simplified-serverless-b2b-application",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "sqs:SendMessage"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "sqs:SendMessage"
+    ],
+    "services": [
+      "logs",
+      "sqs"
+    ],
+    "action_count": 4,
+    "query": "Allow a function to send messages to a queue and write execution logs for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "StatesExecutionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/simplified-serverless-b2b-application/blob/main/template.yaml",
+    "repo": "aws-samples/simplified-serverless-b2b-application",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:PutItem",
+            "lambda:InvokeFunction",
+            "logs:CreateLogDelivery",
+            "logs:CreateLogGroup",
+            "logs:DeleteLogDelivery",
+            "logs:DescribeLogGroups",
+            "logs:DescribeResourcePolicies",
+            "logs:GetLogDelivery",
+            "logs:ListLogDeliveries",
+            "logs:PutResourcePolicy",
+            "logs:UpdateLogDelivery"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:PutItem",
+      "lambda:InvokeFunction",
+      "logs:CreateLogDelivery",
+      "logs:CreateLogGroup",
+      "logs:DeleteLogDelivery",
+      "logs:DescribeLogGroups",
+      "logs:DescribeResourcePolicies",
+      "logs:GetLogDelivery",
+      "logs:ListLogDeliveries",
+      "logs:PutResourcePolicy",
+      "logs:UpdateLogDelivery"
+    ],
+    "services": [
+      "dynamodb",
+      "lambda",
+      "logs"
+    ],
+    "action_count": 11,
+    "query": "Allow a state machine to store data entries in a database table, invoke specific functions for processing, and manage log delivery configurations and policies for monitoring execution activities."
+  },
+  {
+    "policy_name": "TriggerStepFunctionsLambdaFunctionRole",
+    "source": "github",
+    "url": "https://github.com/aws-samples/simplified-serverless-b2b-application/blob/main/template.yaml",
+    "repo": "aws-samples/simplified-serverless-b2b-application",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueAttributes",
+            "sqs:ReceiveMessage",
+            "states:StartExecution"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes",
+      "sqs:ReceiveMessage",
+      "states:StartExecution"
+    ],
+    "services": [
+      "logs",
+      "sqs",
+      "states"
+    ],
+    "action_count": 7,
+    "query": "Allow a function to consume and delete messages from a queue, initiate workflows, and write execution logs"
+  },
+  {
+    "policy_name": "AWSLambdaMSKExecutionRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaMSKExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "kafka:DescribeCluster",
+            "kafka:DescribeClusterV2",
+            "kafka:GetBootstrapBrokers",
+            "ec2:CreateNetworkInterface",
+            "ec2:DescribeNetworkInterfaces",
+            "ec2:DescribeVpcs",
+            "ec2:DeleteNetworkInterface",
+            "ec2:DescribeSubnets",
+            "ec2:DescribeSecurityGroups",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:CreateNetworkInterface",
+      "ec2:DeleteNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeVpcs",
+      "kafka:DescribeCluster",
+      "kafka:DescribeClusterV2",
+      "kafka:GetBootstrapBrokers",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "ec2",
+      "kafka",
+      "logs"
+    ],
+    "action_count": 12,
+    "query": "Allow a function to interact with a messaging cluster by retrieving cluster details and connection information, manage network interfaces for connectivity, and create and write execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "AWSApplicationAutoscalingRDSClusterPolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSApplicationAutoscalingRDSClusterPolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "rds:AddTagsToResource",
+            "rds:CreateDBInstance",
+            "rds:DeleteDBInstance",
+            "rds:DescribeDBClusters",
+            "rds:DescribeDBInstances",
+            "rds:ModifyDBCluster",
+            "cloudwatch:PutMetricAlarm",
+            "cloudwatch:DescribeAlarms",
+            "cloudwatch:DeleteAlarms"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "iam:PassedToService": "rds.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DeleteAlarms",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm",
+      "iam:PassRole",
+      "rds:AddTagsToResource",
+      "rds:CreateDBInstance",
+      "rds:DeleteDBInstance",
+      "rds:DescribeDBClusters",
+      "rds:DescribeDBInstances",
+      "rds:ModifyDBCluster"
+    ],
+    "services": [
+      "cloudwatch",
+      "iam",
+      "rds"
+    ],
+    "action_count": 10,
+    "query": "Allow an autoscaling service to manage database instances by creating, modifying, and deleting them, as well as tagging resources for identification. Enable the service to monitor and manage performance metrics by creating, describing, and deleting metric alarms."
+  },
+  {
+    "policy_name": "AWSCodeDeployRoleForLambda",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSCodeDeployRoleForLambda.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "cloudwatch:DescribeAlarms",
+            "lambda:UpdateAlias",
+            "lambda:GetAlias",
+            "lambda:GetProvisionedConcurrencyConfig",
+            "sns:Publish"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Resource": "arn:aws:s3:::*/CodeDeploy/*",
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "s3:ExistingObjectTag/UseWithCodeDeploy": "true"
+            }
+          },
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": "arn:aws:lambda:*:*:function:CodeDeployHook_*",
+          "Effect": "Allow"
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DescribeAlarms",
+      "lambda:GetAlias",
+      "lambda:GetProvisionedConcurrencyConfig",
+      "lambda:InvokeFunction",
+      "lambda:UpdateAlias",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "sns:Publish"
+    ],
+    "services": [
+      "cloudwatch",
+      "lambda",
+      "s3",
+      "sns"
+    ],
+    "action_count": 8,
+    "query": "Allow a deployment process to update and retrieve configuration details for functions, invoke specific deployment hooks, and publish notifications. Enable access to retrieve deployment artifacts from storage, specifically those tagged for deployment use, and monitor alarm statuses for deployment health checks."
+  },
+  {
+    "policy_name": "AmazonSSMMaintenanceWindowRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonSSMMaintenanceWindowRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ssm:GetAutomationExecution",
+            "ssm:GetParameters",
+            "ssm:ListCommands",
+            "ssm:SendCommand",
+            "ssm:StartAutomationExecution"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": [
+            "arn:aws:lambda:*:*:function:SSM*",
+            "arn:aws:lambda:*:*:function:*:SSM*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "states:DescribeExecution",
+            "states:StartExecution"
+          ],
+          "Resource": [
+            "arn:aws:states:*:*:stateMachine:SSM*",
+            "arn:aws:states:*:*:execution:SSM*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "resource-groups:ListGroups",
+            "resource-groups:ListGroupResources"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "tag:GetResources"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "actions": [
+      "lambda:InvokeFunction",
+      "resource-groups:ListGroupResources",
+      "resource-groups:ListGroups",
+      "ssm:GetAutomationExecution",
+      "ssm:GetParameters",
+      "ssm:ListCommands",
+      "ssm:SendCommand",
+      "ssm:StartAutomationExecution",
+      "states:DescribeExecution",
+      "states:StartExecution",
+      "tag:GetResources"
+    ],
+    "services": [
+      "lambda",
+      "resource-groups",
+      "ssm",
+      "states",
+      "tag"
+    ],
+    "action_count": 11,
+    "query": "Allow a maintenance window process to execute and manage automation tasks, retrieve and list parameters, and send commands. Enable the invocation of specific functions for automation purposes. Permit the initiation and monitoring of workflow executions. Allow listing of resource groups and their resources, as well as retrieving tagged resources."
+  },
+  {
+    "policy_name": "AWSCodeDeployRoleForECS",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSCodeDeployRoleForECS.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "ecs:DescribeServices",
+            "ecs:CreateTaskSet",
+            "ecs:UpdateServicePrimaryTaskSet",
+            "ecs:DeleteTaskSet",
+            "elasticloadbalancing:DescribeTargetGroups",
+            "elasticloadbalancing:DescribeListeners",
+            "elasticloadbalancing:ModifyListener",
+            "elasticloadbalancing:DescribeRules",
+            "elasticloadbalancing:ModifyRule",
+            "lambda:InvokeFunction",
+            "cloudwatch:DescribeAlarms",
+            "sns:Publish",
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "iam:PassRole"
+          ],
+          "Effect": "Allow",
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "iam:PassedToService": [
+                "ecs-tasks.amazonaws.com"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DescribeAlarms",
+      "ecs:CreateTaskSet",
+      "ecs:DeleteTaskSet",
+      "ecs:DescribeServices",
+      "ecs:UpdateServicePrimaryTaskSet",
+      "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:DescribeRules",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:ModifyListener",
+      "elasticloadbalancing:ModifyRule",
+      "iam:PassRole",
+      "lambda:InvokeFunction",
+      "s3:GetObject",
+      "s3:GetObjectVersion",
+      "sns:Publish"
+    ],
+    "services": [
+      "cloudwatch",
+      "ecs",
+      "elasticloadbalancing",
+      "iam",
+      "lambda",
+      "s3",
+      "sns"
+    ],
+    "action_count": 15,
+    "query": "Allow a deployment service to manage task sets and update services for container orchestration, modify load balancer configurations, and retrieve deployment artifacts from storage. Enable the service to invoke functions for custom deployment logic, monitor deployment status through alarm descriptions, and send notifications."
+  },
+  {
+    "policy_name": "AmazonOpenSearchDirectQueryGlueCreateAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonOpenSearchDirectQueryGlueCreateAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AmazonOpenSearchDirectQueryGlueCreateAccess",
+          "Effect": "Allow",
+          "Action": [
+            "glue:CreateDatabase",
+            "glue:CreatePartition",
+            "glue:CreateTable",
+            "glue:BatchCreatePartition"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "glue:BatchCreatePartition",
+      "glue:CreateDatabase",
+      "glue:CreatePartition",
+      "glue:CreateTable"
+    ],
+    "services": [
+      "glue"
+    ],
+    "action_count": 4,
+    "query": "Allow a data processing service to create databases, tables, and partitions, including batch creation of partitions, for managing and organizing data schema definitions"
+  },
+  {
+    "policy_name": "AWSLambdaKinesisExecutionRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaKinesisExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "kinesis:DescribeStream",
+            "kinesis:DescribeStreamSummary",
+            "kinesis:GetRecords",
+            "kinesis:GetShardIterator",
+            "kinesis:ListShards",
+            "kinesis:ListStreams",
+            "kinesis:SubscribeToShard",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "kinesis:DescribeStream",
+      "kinesis:DescribeStreamSummary",
+      "kinesis:GetRecords",
+      "kinesis:GetShardIterator",
+      "kinesis:ListShards",
+      "kinesis:ListStreams",
+      "kinesis:SubscribeToShard",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "kinesis",
+      "logs"
+    ],
+    "action_count": 10,
+    "query": "Allow a function to consume and process data streams by retrieving records and shard information, and write execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "DynamoDBKinesisReplicationServiceRolePolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./DynamoDBKinesisReplicationServiceRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": "kms:GenerateDataKey",
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "kms:ViaService": "kinesis.*.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "kinesis:PutRecord",
+            "kinesis:PutRecords",
+            "kinesis:DescribeStream"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "kinesis:DescribeStream",
+      "kinesis:PutRecord",
+      "kinesis:PutRecords",
+      "kms:GenerateDataKey"
+    ],
+    "services": [
+      "kinesis",
+      "kms"
+    ],
+    "action_count": 4,
+    "query": "Allow a data replication service to write data records to a streaming service and describe the stream, while also enabling the generation of encryption keys for secure data handling during the replication process."
+  },
+  {
+    "policy_name": "AWSElasticBeanstalkRoleSNS",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSElasticBeanstalkRoleSNS.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowBeanstalkManageSNS",
+          "Effect": "Allow",
+          "Action": [
+            "sns:CreateTopic",
+            "sns:SetTopicAttributes",
+            "sns:DeleteTopic"
+          ],
+          "Resource": [
+            "arn:aws:sns:*:*:ElasticBeanstalkNotifications-*"
+          ]
+        },
+        {
+          "Sid": "AllowSNSPublish",
+          "Effect": "Allow",
+          "Action": [
+            "sns:GetTopicAttributes",
+            "sns:Subscribe",
+            "sns:Unsubscribe",
+            "sns:Publish"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "sns:CreateTopic",
+      "sns:DeleteTopic",
+      "sns:GetTopicAttributes",
+      "sns:Publish",
+      "sns:SetTopicAttributes",
+      "sns:Subscribe",
+      "sns:Unsubscribe"
+    ],
+    "services": [
+      "sns"
+    ],
+    "action_count": 7,
+    "query": "Allow an application environment to manage notification topics by creating, configuring, and deleting specific topics, as well as subscribing and unsubscribing to any topic, retrieving topic attributes, and sending messages to any topic."
+  },
+  {
+    "policy_name": "AmazonEKSDashboardConsoleReadOnly",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonEKSDashboardConsoleReadOnly.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AmazonEKSDashboardReadOnly",
+          "Effect": "Allow",
+          "Action": [
+            "eks:ListDashboardData",
+            "eks:ListDashboardResources",
+            "eks:DescribeClusterVersions"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AmazonOrganizationsReadOnly",
+          "Effect": "Allow",
+          "Action": [
+            "organizations:DescribeOrganization",
+            "organizations:ListAWSServiceAccessForOrganization",
+            "organizations:ListRoots",
+            "organizations:ListAccountsForParent",
+            "organizations:ListOrganizationalUnitsForParent"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AmazonOrganizationsDelegatedAdmin",
+          "Effect": "Allow",
+          "Action": [
+            "organizations:ListDelegatedAdministrators"
+          ],
+          "Resource": [
+            "*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "organizations:ServicePrincipal": "eks.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "eks:DescribeClusterVersions",
+      "eks:ListDashboardData",
+      "eks:ListDashboardResources",
+      "organizations:DescribeOrganization",
+      "organizations:ListAWSServiceAccessForOrganization",
+      "organizations:ListAccountsForParent",
+      "organizations:ListDelegatedAdministrators",
+      "organizations:ListOrganizationalUnitsForParent",
+      "organizations:ListRoots"
+    ],
+    "services": [
+      "eks",
+      "organizations"
+    ],
+    "action_count": 9,
+    "query": "Allow read-only access to view dashboard data and resources related to a managed container service, including cluster version details. Additionally, allow read-only access to organizational structure and service access information, including listing delegated administrators for the container service."
+  },
+  {
+    "policy_name": "AmazonElasticContainerRegistryPublicReadOnly",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonElasticContainerRegistryPublicReadOnly.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ecr-public:GetAuthorizationToken",
+            "sts:GetServiceBearerToken",
+            "ecr-public:BatchCheckLayerAvailability",
+            "ecr-public:GetRepositoryPolicy",
+            "ecr-public:DescribeRepositories",
+            "ecr-public:DescribeRegistries",
+            "ecr-public:DescribeImages",
+            "ecr-public:DescribeImageTags",
+            "ecr-public:GetRepositoryCatalogData",
+            "ecr-public:GetRegistryCatalogData"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ecr-public:BatchCheckLayerAvailability",
+      "ecr-public:DescribeImageTags",
+      "ecr-public:DescribeImages",
+      "ecr-public:DescribeRegistries",
+      "ecr-public:DescribeRepositories",
+      "ecr-public:GetAuthorizationToken",
+      "ecr-public:GetRegistryCatalogData",
+      "ecr-public:GetRepositoryCatalogData",
+      "ecr-public:GetRepositoryPolicy",
+      "sts:GetServiceBearerToken"
+    ],
+    "services": [
+      "ecr-public",
+      "sts"
+    ],
+    "action_count": 10,
+    "query": "Allow read-only access to view and describe public container image repositories, including retrieving authorization tokens and catalog data, and checking the availability of image layers."
+  },
+  {
+    "policy_name": "AmazonS3ObjectLambdaExecutionRolePolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonS3ObjectLambdaExecutionRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents",
+            "s3-object-lambda:WriteGetObjectResponse"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "s3-object-lambda:WriteGetObjectResponse"
+    ],
+    "services": [
+      "logs",
+      "s3-object-lambda"
+    ],
+    "action_count": 4,
+    "query": "Allow a processing function to modify and return data retrieved from a storage bucket while also creating and writing execution logs for monitoring purposes."
+  },
+  {
+    "policy_name": "AWSCodeDeployRoleForLambdaLimited",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSCodeDeployRoleForLambdaLimited.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "cloudwatch:DescribeAlarms",
+            "lambda:UpdateAlias",
+            "lambda:GetAlias",
+            "lambda:GetProvisionedConcurrencyConfig"
+          ],
+          "Resource": "*",
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Resource": "arn:aws:s3:::*/CodeDeploy/*",
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:GetObjectVersion"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringEquals": {
+              "s3:ExistingObjectTag/UseWithCodeDeploy": "true"
+            }
+          },
+          "Effect": "Allow"
+        },
+        {
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": "arn:aws:lambda:*:*:function:CodeDeployHook_*",
+          "Effect": "Allow"
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DescribeAlarms",
+      "lambda:GetAlias",
+      "lambda:GetProvisionedConcurrencyConfig",
+      "lambda:InvokeFunction",
+      "lambda:UpdateAlias",
+      "s3:GetObject",
+      "s3:GetObjectVersion"
+    ],
+    "services": [
+      "cloudwatch",
+      "lambda",
+      "s3"
+    ],
+    "action_count": 7,
+    "query": "Allow a deployment process to update and retrieve configuration details for function aliases, invoke specific deployment hooks, and access deployment-related objects in storage. Additionally, enable the process to describe alarm configurations for monitoring purposes."
+  },
+  {
+    "policy_name": "AWSLambdaDynamoDBExecutionRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaDynamoDBExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:DescribeStream",
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:ListStreams",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:DescribeStream",
+      "dynamodb:GetRecords",
+      "dynamodb:GetShardIterator",
+      "dynamodb:ListStreams",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents"
+    ],
+    "services": [
+      "dynamodb",
+      "logs"
+    ],
+    "action_count": 7,
+    "query": "Allow a function to read data from a database stream for processing and write execution logs for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "AWSLambdaSQSQueueExecutionRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaSQSQueueExecutionRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "sqs:ReceiveMessage",
+            "sqs:DeleteMessage",
+            "sqs:GetQueueAttributes",
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "sqs:DeleteMessage",
+      "sqs:GetQueueAttributes",
+      "sqs:ReceiveMessage"
+    ],
+    "services": [
+      "logs",
+      "sqs"
+    ],
+    "action_count": 6,
+    "query": "Allow a function to consume messages from a queue and write execution logs"
+  },
+  {
+    "policy_name": "AWSLambdaInvocation-DynamoDB",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSLambdaInvocation-DynamoDB.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "lambda:InvokeFunction"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:DescribeStream",
+            "dynamodb:GetRecords",
+            "dynamodb:GetShardIterator",
+            "dynamodb:ListStreams"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "dynamodb:DescribeStream",
+      "dynamodb:GetRecords",
+      "dynamodb:GetShardIterator",
+      "dynamodb:ListStreams",
+      "lambda:InvokeFunction"
+    ],
+    "services": [
+      "dynamodb",
+      "lambda"
+    ],
+    "action_count": 5,
+    "query": "Allow a process to invoke functions and interact with data streams by describing streams, retrieving records, obtaining shard iterators, and listing streams from a database service."
+  },
+  {
+    "policy_name": "AWSTransformSecretsManagerConnectorPolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSTransformSecretsManagerConnectorPolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "ReadSecretsManagerSecret",
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:GetSecretValue",
+            "secretsmanager:DescribeSecret"
+          ],
+          "Resource": "arn:aws:secretsmanager:*:*:secret:${aws:PrincipalTag/SecretId}",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "DecryptWithCustomerProvidedKMSKey",
+          "Effect": "Allow",
+          "Action": [
+            "kms:Decrypt"
+          ],
+          "Resource": "arn:aws:kms:*:*:key/${aws:PrincipalTag/KMSKeyId}",
+          "Condition": {
+            "StringLike": {
+              "kms:EncryptionContext:SecretARN": "arn:aws:secretsmanager:${aws:RequestedRegion}:${aws:PrincipalAccount}:secret:${aws:PrincipalTag/SecretId}",
+              "kms:ViaService": "secretsmanager.*.amazonaws.com"
+            },
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "DescribeKMSKey",
+          "Effect": "Allow",
+          "Action": [
+            "kms:DescribeKey"
+          ],
+          "Resource": "arn:aws:kms:*:*:key/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "kms:Decrypt",
+      "kms:DescribeKey",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:GetSecretValue"
+    ],
+    "services": [
+      "kms",
+      "secretsmanager"
+    ],
+    "action_count": 4,
+    "query": "Allow a service to retrieve and describe secret values, decrypt them using a specific encryption key, and describe the encryption key used for decryption."
+  },
+  {
+    "policy_name": "AWSFaultInjectionSimulatorEC2Access",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSFaultInjectionSimulatorEC2Access.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowEc2Actions",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:RebootInstances",
+            "ec2:SendSpotInstanceInterruptions",
+            "ec2:StartInstances",
+            "ec2:StopInstances",
+            "ec2:TerminateInstances"
+          ],
+          "Resource": "arn:aws:ec2:*:*:instance/*"
+        },
+        {
+          "Sid": "AllowEc2InstancesWithEncryptedEbsVolumes",
+          "Effect": "Allow",
+          "Action": [
+            "kms:CreateGrant"
+          ],
+          "Resource": [
+            "arn:aws:kms:*:*:key/*"
+          ],
+          "Condition": {
+            "StringLike": {
+              "kms:ViaService": "ec2.*.amazonaws.com"
+            },
+            "Bool": {
+              "kms:GrantIsForAWSResource": "true"
+            }
+          }
+        },
+        {
+          "Sid": "AllowSSMSendOnEc2",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:SendCommand"
+          ],
+          "Resource": [
+            "arn:aws:ec2:*:*:instance/*",
+            "arn:aws:ssm:*:*:document/*"
+          ]
+        },
+        {
+          "Sid": "AllowSSMStopOnEc2",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:CancelCommand",
+            "ssm:ListCommands"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "DescribeInstances",
+          "Effect": "Allow",
+          "Action": "ec2:DescribeInstances",
+          "Resource": "*"
+        },
+        {
+          "Sid": "DescribeSubnets",
+          "Effect": "Allow",
+          "Action": "ec2:DescribeSubnets",
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:DescribeInstances",
+      "ec2:DescribeSubnets",
+      "ec2:RebootInstances",
+      "ec2:SendSpotInstanceInterruptions",
+      "ec2:StartInstances",
+      "ec2:StopInstances",
+      "ec2:TerminateInstances",
+      "kms:CreateGrant",
+      "ssm:CancelCommand",
+      "ssm:ListCommands",
+      "ssm:SendCommand"
+    ],
+    "services": [
+      "ec2",
+      "kms",
+      "ssm"
+    ],
+    "action_count": 11,
+    "query": "Allow a fault injection simulator to manage the lifecycle of virtual machines, including starting, stopping, rebooting, and terminating instances, as well as sending interruption signals. Enable the simulator to execute commands on these machines and manage command execution. Additionally, allow the creation of encryption grants for machines with encrypted storage and provide the ability to describe machine and network configurations."
+  },
+  {
+    "policy_name": "AWSFaultInjectionSimulatorECSAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSFaultInjectionSimulatorECSAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "Clusters",
+          "Effect": "Allow",
+          "Action": [
+            "ecs:DescribeClusters",
+            "ecs:ListContainerInstances"
+          ],
+          "Resource": [
+            "arn:aws:ecs:*:*:cluster/*"
+          ]
+        },
+        {
+          "Sid": "Tasks",
+          "Effect": "Allow",
+          "Action": [
+            "ecs:DescribeTasks",
+            "ecs:StopTask"
+          ],
+          "Resource": [
+            "arn:aws:ecs:*:*:task/*/*"
+          ]
+        },
+        {
+          "Sid": "ContainerInstances",
+          "Effect": "Allow",
+          "Action": [
+            "ecs:UpdateContainerInstancesState"
+          ],
+          "Resource": [
+            "arn:aws:ecs:*:*:container-instance/*/*"
+          ]
+        },
+        {
+          "Sid": "ListTasks",
+          "Effect": "Allow",
+          "Action": [
+            "ecs:ListTasks"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "SSMSend",
+          "Effect": "Allow",
+          "Action": "ssm:SendCommand",
+          "Resource": [
+            "arn:aws:ssm:*:*:managed-instance/*",
+            "arn:aws:ssm:*:*:document/*"
+          ]
+        },
+        {
+          "Sid": "SSMList",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:ListCommands",
+            "ssm:CancelCommand"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "TargetResolutionByTags",
+          "Effect": "Allow",
+          "Action": [
+            "tag:GetResources"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "DescribeContainerInstances",
+          "Effect": "Allow",
+          "Action": "ecs:DescribeContainerInstances",
+          "Resource": "arn:aws:ecs:*:*:container-instance/*/*"
+        },
+        {
+          "Sid": "DescribeInstances",
+          "Effect": "Allow",
+          "Action": "ec2:DescribeInstances",
+          "Resource": "*"
+        },
+        {
+          "Sid": "DescribeSubnets",
+          "Effect": "Allow",
+          "Action": "ec2:DescribeSubnets",
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:DescribeInstances",
+      "ec2:DescribeSubnets",
+      "ecs:DescribeClusters",
+      "ecs:DescribeContainerInstances",
+      "ecs:DescribeTasks",
+      "ecs:ListContainerInstances",
+      "ecs:ListTasks",
+      "ecs:StopTask",
+      "ecs:UpdateContainerInstancesState",
+      "ssm:CancelCommand",
+      "ssm:ListCommands",
+      "ssm:SendCommand",
+      "tag:GetResources"
+    ],
+    "services": [
+      "ec2",
+      "ecs",
+      "ssm",
+      "tag"
+    ],
+    "action_count": 13,
+    "query": "Allow a fault injection simulator to manage and inspect container clusters by describing and listing clusters, tasks, and container instances, as well as stopping tasks and updating container instance states. Enable the simulator to execute and manage commands on managed instances and documents, and resolve targets by tags. Additionally, allow the simulator to retrieve information about instances and subnets for comprehensive environment awareness."
+  },
+  {
+    "policy_name": "CloudWatchLogsCrossAccountSharingConfiguration",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLogsCrossAccountSharingConfiguration.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "logs:Link",
+            "oam:ListLinks"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oam:DeleteLink",
+            "oam:GetLink",
+            "oam:TagResource"
+          ],
+          "Resource": "arn:aws:oam:*:*:link/*"
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "oam:CreateLink",
+            "oam:UpdateLink"
+          ],
+          "Resource": [
+            "arn:aws:oam:*:*:link/*",
+            "arn:aws:oam:*:*:sink/*"
+          ]
+        }
+      ]
+    },
+    "actions": [
+      "logs:Link",
+      "oam:CreateLink",
+      "oam:DeleteLink",
+      "oam:GetLink",
+      "oam:ListLinks",
+      "oam:TagResource",
+      "oam:UpdateLink"
+    ],
+    "services": [
+      "logs",
+      "oam"
+    ],
+    "action_count": 7,
+    "query": "Allow the configuration and management of cross-account sharing links for monitoring data, including creating, updating, and deleting links, as well as tagging and listing them."
+  },
+  {
+    "policy_name": "AmazonEC2SpotFleetAutoscaleRole",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonEC2SpotFleetAutoscaleRole.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeSpotFleetRequests",
+            "ec2:ModifySpotFleetRequest"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:DescribeAlarms",
+            "cloudwatch:PutMetricAlarm",
+            "cloudwatch:DeleteAlarms"
+          ],
+          "Resource": [
+            "*"
+          ]
+        },
+        {
+          "Action": "iam:CreateServiceLinkedRole",
+          "Effect": "Allow",
+          "Resource": "arn:aws:iam::*:role/aws-service-role/ec2.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_EC2SpotFleetRequest",
+          "Condition": {
+            "StringLike": {
+              "iam:AWSServiceName": "ec2.application-autoscaling.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:DeleteAlarms",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm",
+      "ec2:DescribeSpotFleetRequests",
+      "ec2:ModifySpotFleetRequest",
+      "iam:CreateServiceLinkedRole"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2",
+      "iam"
+    ],
+    "action_count": 6,
+    "query": "Allow an autoscaling process to manage and adjust spot fleet requests by describing and modifying them, configure and manage monitoring alarms to trigger scaling actions, and create a service-linked role necessary for application autoscaling operations."
+  },
+  {
+    "policy_name": "AWSElasticBeanstalkRoleRDS",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSElasticBeanstalkRoleRDS.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowRDS",
+          "Effect": "Allow",
+          "Action": [
+            "rds:CreateDBSecurityGroup",
+            "rds:DeleteDBSecurityGroup",
+            "rds:AuthorizeDBSecurityGroupIngress",
+            "rds:CreateDBInstance",
+            "rds:ModifyDBInstance",
+            "rds:DeleteDBInstance"
+          ],
+          "Resource": [
+            "arn:aws:rds:*:*:secgrp:awseb-e-*",
+            "arn:aws:rds:*:*:db:*"
+          ]
+        }
+      ]
+    },
+    "actions": [
+      "rds:AuthorizeDBSecurityGroupIngress",
+      "rds:CreateDBInstance",
+      "rds:CreateDBSecurityGroup",
+      "rds:DeleteDBInstance",
+      "rds:DeleteDBSecurityGroup",
+      "rds:ModifyDBInstance"
+    ],
+    "services": [
+      "rds"
+    ],
+    "action_count": 6,
+    "query": "Allow an application environment to manage database instances by creating, modifying, and deleting them, as well as managing associated security groups for access control."
+  },
+  {
+    "policy_name": "CloudWatchLambdaApplicationSignalsExecutionRolePolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchLambdaApplicationSignalsExecutionRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CloudWatchApplicationSignalsXrayWritePermissions",
+          "Effect": "Allow",
+          "Action": [
+            "xray:PutTraceSegments"
+          ],
+          "Resource": [
+            "*"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "CloudWatchApplicationSignalsLogGroupWritePermissions",
+          "Effect": "Allow",
+          "Action": [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource": "arn:aws:logs:*:*:log-group:/aws/application-signals/data:*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+      "xray:PutTraceSegments"
+    ],
+    "services": [
+      "logs",
+      "xray"
+    ],
+    "action_count": 4,
+    "query": "Allow an application to write trace segments for monitoring and create and manage log groups, streams, and events for logging application signals."
+  },
+  {
+    "policy_name": "AmazonRedshiftDataFullAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AmazonRedshiftDataFullAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "DataAPIPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "redshift-data:BatchExecuteStatement",
+            "redshift-data:ExecuteStatement",
+            "redshift-data:CancelStatement",
+            "redshift-data:ListStatements",
+            "redshift-data:GetStatementResult",
+            "redshift-data:DescribeStatement",
+            "redshift-data:ListDatabases",
+            "redshift-data:ListSchemas",
+            "redshift-data:ListTables",
+            "redshift-data:DescribeTable"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "SecretsManagerPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "secretsmanager:GetSecretValue"
+          ],
+          "Resource": "arn:aws:secretsmanager:*:*:secret:*",
+          "Condition": {
+            "StringLike": {
+              "secretsmanager:ResourceTag/RedshiftDataFullAccess": "*"
+            }
+          }
+        },
+        {
+          "Sid": "GetCredentialsForAPIUser",
+          "Effect": "Allow",
+          "Action": "redshift:GetClusterCredentials",
+          "Resource": [
+            "arn:aws:redshift:*:*:dbname:*/*",
+            "arn:aws:redshift:*:*:dbuser:*/redshift_data_api_user"
+          ]
+        },
+        {
+          "Sid": "GetCredentialsWithFederatedIAMCredentials",
+          "Effect": "Allow",
+          "Action": "redshift:GetClusterCredentialsWithIAM",
+          "Resource": "arn:aws:redshift:*:*:dbname:*/*"
+        },
+        {
+          "Sid": "GetCredentialsForServerless",
+          "Effect": "Allow",
+          "Action": "redshift-serverless:GetCredentials",
+          "Resource": "arn:aws:redshift-serverless:*:*:workgroup/*",
+          "Condition": {
+            "StringLike": {
+              "aws:ResourceTag/RedshiftDataFullAccess": "*"
+            }
+          }
+        },
+        {
+          "Sid": "DenyCreateAPIUser",
+          "Effect": "Deny",
+          "Action": "redshift:CreateClusterUser",
+          "Resource": [
+            "arn:aws:redshift:*:*:dbuser:*/redshift_data_api_user"
+          ]
+        },
+        {
+          "Sid": "ServiceLinkedRole",
+          "Effect": "Allow",
+          "Action": "iam:CreateServiceLinkedRole",
+          "Resource": "arn:aws:iam::*:role/aws-service-role/redshift-data.amazonaws.com/AWSServiceRoleForRedshift",
+          "Condition": {
+            "StringLike": {
+              "iam:AWSServiceName": "redshift-data.amazonaws.com"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "iam:CreateServiceLinkedRole",
+      "redshift-data:BatchExecuteStatement",
+      "redshift-data:CancelStatement",
+      "redshift-data:DescribeStatement",
+      "redshift-data:DescribeTable",
+      "redshift-data:ExecuteStatement",
+      "redshift-data:GetStatementResult",
+      "redshift-data:ListDatabases",
+      "redshift-data:ListSchemas",
+      "redshift-data:ListStatements",
+      "redshift-data:ListTables",
+      "redshift-serverless:GetCredentials",
+      "redshift:CreateClusterUser",
+      "redshift:GetClusterCredentials",
+      "redshift:GetClusterCredentialsWithIAM",
+      "secretsmanager:GetSecretValue"
+    ],
+    "services": [
+      "iam",
+      "redshift",
+      "redshift-data",
+      "redshift-serverless",
+      "secretsmanager"
+    ],
+    "action_count": 16,
+    "query": "Allow data processing operations to execute, manage, and retrieve results from queries, list database structures, and obtain credentials for accessing data environments. Enable secure access to sensitive information by retrieving secret values tagged for data access. Additionally, allow the creation of service-linked roles necessary for data operations while preventing the creation of specific user accounts."
+  },
+  {
+    "policy_name": "AWSEC2SqlHaServiceRolePolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWSEC2SqlHaServiceRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowSSMSendCommandToTaggedInstances",
+          "Effect": "Allow",
+          "Action": "ssm:SendCommand",
+          "Resource": [
+            "arn:aws:ec2:*:*:instance/*"
+          ],
+          "Condition": {
+            "StringLike": {
+              "aws:ResourceTag/SqlHaMonitored": "true"
+            }
+          }
+        },
+        {
+          "Sid": "AllowSSMSendCommandOfOwnedDoc",
+          "Effect": "Allow",
+          "Action": "ssm:SendCommand",
+          "Resource": [
+            "arn:aws:ssm:*:*:document/AWSEC2-DetectSqlHa*"
+          ]
+        },
+        {
+          "Sid": "AllowSSMNonMutating",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:DescribeInstanceInformation",
+            "ssm:GetCommandInvocation",
+            "ssm:ListCommands",
+            "ssm:ListCommandInvocations"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowEC2NonMutating",
+          "Effect": "Allow",
+          "Action": [
+            "ec2:DescribeInstances",
+            "ec2:DescribeInstanceAttribute",
+            "ec2:DescribeInstanceStatus",
+            "ec2:DescribeTags"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowEventsMutateManagedRule",
+          "Effect": "Allow",
+          "Action": [
+            "events:PutTargets",
+            "events:PutRule",
+            "events:DeleteRule",
+            "events:RemoveTargets"
+          ],
+          "Condition": {
+            "StringEquals": {
+              "events:ManagedBy": "ec2sqlha.amazonaws.com",
+              "aws:PrincipalAccount": "${aws:ResourceAccount}"
+            }
+          },
+          "Resource": "arn:aws:events:*:*:rule/AWSEC2SqlHa*"
+        },
+        {
+          "Sid": "AllowEventsNonMutatingManagedRule",
+          "Effect": "Allow",
+          "Action": [
+            "events:ListTargetsByRule",
+            "events:DescribeRule"
+          ],
+          "Resource": "arn:aws:events:*:*:rule/AWSEC2SqlHa*"
+        }
+      ]
+    },
+    "actions": [
+      "ec2:DescribeInstanceAttribute",
+      "ec2:DescribeInstanceStatus",
+      "ec2:DescribeInstances",
+      "ec2:DescribeTags",
+      "events:DeleteRule",
+      "events:DescribeRule",
+      "events:ListTargetsByRule",
+      "events:PutRule",
+      "events:PutTargets",
+      "events:RemoveTargets",
+      "ssm:DescribeInstanceInformation",
+      "ssm:GetCommandInvocation",
+      "ssm:ListCommandInvocations",
+      "ssm:ListCommands",
+      "ssm:SendCommand"
+    ],
+    "services": [
+      "ec2",
+      "events",
+      "ssm"
+    ],
+    "action_count": 15,
+    "query": "Allow a high availability monitoring service to execute commands on tagged compute instances and retrieve command execution details, describe instance information and status, and manage event rules and targets for monitoring purposes."
+  },
+  {
+    "policy_name": "AWS-SSM-DiagnosisAutomation-AdministrationRolePolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./AWS-SSM-DiagnosisAutomation-AdministrationRolePolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowReadOnlyAccessSSMResource",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:DescribeAutomationExecutions",
+            "ssm:DescribeAutomationStepExecutions",
+            "ssm:GetAutomationExecution"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowExecuteSSMAutomation",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:StartAutomationExecution"
+          ],
+          "Resource": [
+            "arn:aws:ssm:*:*:document/AWS-*UnmanagedEC2*",
+            "arn:aws:ssm:*:*:automation-execution/*",
+            "arn:aws:ssm:*:*:automation-definition/AWS-*UnmanagedEC2*:*"
+          ]
+        },
+        {
+          "Sid": "AllowKMSOperations",
+          "Effect": "Allow",
+          "Action": [
+            "kms:Decrypt",
+            "kms:GenerateDataKey"
+          ],
+          "Resource": "arn:aws:kms:*:*:key/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceTag/SystemsManagerManaged": "true"
+            },
+            "ArnLike": {
+              "kms:EncryptionContext:aws:s3:arn": "arn:aws:s3:::do-not-delete-ssm-diagnosis-*"
+            },
+            "StringLike": {
+              "kms:ViaService": "s3.*.amazonaws.com"
+            },
+            "Bool": {
+              "aws:ViaAWSService": "true"
+            }
+          }
+        },
+        {
+          "Sid": "AllowAssumeDiagnosisExecutionRoleWithinAccount",
+          "Effect": "Allow",
+          "Action": "sts:AssumeRole",
+          "Resource": "arn:aws:iam::*:role/AWS-SSM-DiagnosisExecutionRole*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "AllowPassRoleOnSelfToSsm",
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": "arn:aws:iam::*:role/AWS-SSM-DiagnosisAdminRole*",
+          "Condition": {
+            "StringEquals": {
+              "iam:PassedToService": "ssm.amazonaws.com"
+            }
+          }
+        },
+        {
+          "Sid": "AllowReadWriteToSsmDiagnosisBucketInSameAccount",
+          "Effect": "Allow",
+          "Action": [
+            "s3:PutObject",
+            "s3:GetObject",
+            "s3:DeleteObject"
+          ],
+          "Resource": "arn:aws:s3:::do-not-delete-ssm-diagnosis-*/actions/*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        },
+        {
+          "Sid": "AllowListBucketOnSsmDiagnosisBucketInSameAccount",
+          "Effect": "Allow",
+          "Action": [
+            "s3:ListBucket"
+          ],
+          "Resource": "arn:aws:s3:::do-not-delete-ssm-diagnosis-*",
+          "Condition": {
+            "StringEquals": {
+              "aws:ResourceAccount": "${aws:PrincipalAccount}"
+            }
+          }
+        }
+      ]
+    },
+    "actions": [
+      "iam:PassRole",
+      "kms:Decrypt",
+      "kms:GenerateDataKey",
+      "s3:DeleteObject",
+      "s3:GetObject",
+      "s3:ListBucket",
+      "s3:PutObject",
+      "ssm:DescribeAutomationExecutions",
+      "ssm:DescribeAutomationStepExecutions",
+      "ssm:GetAutomationExecution",
+      "ssm:StartAutomationExecution",
+      "sts:AssumeRole"
+    ],
+    "services": [
+      "iam",
+      "kms",
+      "s3",
+      "ssm",
+      "sts"
+    ],
+    "action_count": 12,
+    "query": "Allow an automation management role to initiate and monitor automation tasks, manage encryption keys for secure data handling, and perform read-write operations on a designated storage bucket for diagnostic purposes. Additionally, enable the role to assume necessary execution roles and pass its own role for automation processes."
+  },
+  {
+    "policy_name": "CloudWatchAgentServerPolicy",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/./CloudWatchAgentServerPolicy.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "CWACloudWatchServerPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "cloudwatch:PutMetricData",
+            "ec2:DescribeVolumes",
+            "ec2:DescribeTags",
+            "logs:PutLogEvents",
+            "logs:PutRetentionPolicy",
+            "logs:DescribeLogStreams",
+            "logs:DescribeLogGroups",
+            "logs:CreateLogStream",
+            "logs:CreateLogGroup",
+            "xray:PutTraceSegments",
+            "xray:PutTelemetryRecords",
+            "xray:GetSamplingRules",
+            "xray:GetSamplingTargets",
+            "xray:GetSamplingStatisticSummaries"
+          ],
+          "Resource": "*"
+        },
+        {
+          "Sid": "CWASSMServerPermissions",
+          "Effect": "Allow",
+          "Action": [
+            "ssm:GetParameter"
+          ],
+          "Resource": "arn:aws:ssm:*:*:parameter/AmazonCloudWatch-*"
+        }
+      ]
+    },
+    "actions": [
+      "cloudwatch:PutMetricData",
+      "ec2:DescribeTags",
+      "ec2:DescribeVolumes",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:PutLogEvents",
+      "logs:PutRetentionPolicy",
+      "ssm:GetParameter",
+      "xray:GetSamplingRules",
+      "xray:GetSamplingStatisticSummaries",
+      "xray:GetSamplingTargets",
+      "xray:PutTelemetryRecords",
+      "xray:PutTraceSegments"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2",
+      "logs",
+      "ssm",
+      "xray"
+    ],
+    "action_count": 15,
+    "query": "Allow a monitoring agent to send custom metrics, retrieve volume and tag information, and manage log groups and streams for logging purposes. Enable the agent to access specific configuration parameters and interact with tracing services to submit trace data and retrieve sampling rules and statistics."
+  },
+  {
+    "policy_name": "AWSCodePipeline_ReadOnlyAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSCodePipeline_ReadOnlyAccess.html",
+    "policy_document": {
+      "Statement": [
+        {
+          "Action": [
+            "codepipeline:GetPipeline",
+            "codepipeline:GetPipelineState",
+            "codepipeline:GetPipelineExecution",
+            "codepipeline:ListPipelineExecutions",
+            "codepipeline:ListActionExecutions",
+            "codepipeline:ListActionTypes",
+            "codepipeline:ListPipelines",
+            "codepipeline:ListTagsForResource",
+            "s3:ListAllMyBuckets",
+            "codestar-notifications:ListNotificationRules",
+            "codestar-notifications:ListEventTypes",
+            "codestar-notifications:ListTargets"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        },
+        {
+          "Action": [
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:GetBucketPolicy"
+          ],
+          "Effect": "Allow",
+          "Resource": "arn:aws:s3::*:codepipeline-*"
+        },
+        {
+          "Sid": "CodeStarNotificationsReadOnlyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "codestar-notifications:DescribeNotificationRule"
+          ],
+          "Resource": "*",
+          "Condition": {
+            "StringLike": {
+              "codestar-notifications:NotificationsForResource": "arn:aws:codepipeline:*"
+            }
+          }
+        }
+      ],
+      "Version": "2012-10-17"
+    },
+    "actions": [
+      "codepipeline:GetPipeline",
+      "codepipeline:GetPipelineExecution",
+      "codepipeline:GetPipelineState",
+      "codepipeline:ListActionExecutions",
+      "codepipeline:ListActionTypes",
+      "codepipeline:ListPipelineExecutions",
+      "codepipeline:ListPipelines",
+      "codepipeline:ListTagsForResource",
+      "codestar-notifications:DescribeNotificationRule",
+      "codestar-notifications:ListEventTypes",
+      "codestar-notifications:ListNotificationRules",
+      "codestar-notifications:ListTargets",
+      "s3:GetBucketPolicy",
+      "s3:GetObject",
+      "s3:ListAllMyBuckets",
+      "s3:ListBucket"
+    ],
+    "services": [
+      "codepipeline",
+      "codestar-notifications",
+      "s3"
+    ],
+    "action_count": 16,
+    "query": "Allow read-only access to view and list details of pipeline configurations, executions, and actions, as well as to retrieve and list objects in specific storage locations associated with pipelines. Additionally, enable the ability to list and describe notification rules and targets related to the pipeline activities."
+  },
+  {
+    "policy_name": "AWSStepFunctionsReadOnlyAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSStepFunctionsReadOnlyAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "ReadOnlyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "states:ListStateMachines",
+            "states:ListActivities",
+            "states:DescribeStateMachine",
+            "states:DescribeStateMachineForExecution",
+            "states:ListExecutions",
+            "states:DescribeExecution",
+            "states:GetExecutionHistory",
+            "states:DescribeActivity",
+            "states:ListTagsForResource",
+            "states:DescribeMapRun",
+            "states:ListMapRuns",
+            "states:DescribeStateMachineAlias",
+            "states:ListStateMachineAliases",
+            "states:ListStateMachineVersions",
+            "states:ValidateStateMachineDefinition"
+          ],
+          "Resource": "*"
+        }
+      ]
+    },
+    "actions": [
+      "states:DescribeActivity",
+      "states:DescribeExecution",
+      "states:DescribeMapRun",
+      "states:DescribeStateMachine",
+      "states:DescribeStateMachineAlias",
+      "states:DescribeStateMachineForExecution",
+      "states:GetExecutionHistory",
+      "states:ListActivities",
+      "states:ListExecutions",
+      "states:ListMapRuns",
+      "states:ListStateMachineAliases",
+      "states:ListStateMachineVersions",
+      "states:ListStateMachines",
+      "states:ListTagsForResource",
+      "states:ValidateStateMachineDefinition"
+    ],
+    "services": [
+      "states"
+    ],
+    "action_count": 15,
+    "query": "Allow read-only access to view and list details of workflows, activities, executions, and their associated metadata, including the ability to validate workflow definitions."
+  },
+  {
+    "policy_name": "AWSGlueSchemaRegistryReadonlyAccess",
+    "source": "aws_managed",
+    "url": "https://docs.aws.amazon.com/aws-managed-policy/latest/reference/AWSGlueSchemaRegistryReadonlyAccess.html",
+    "policy_document": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AWSGlueSchemaRegistryReadonlyAccess",
+          "Effect": "Allow",
+          "Action": [
+            "glue:GetRegistry",
+            "glue:ListRegistries",
+            "glue:GetSchema",
+            "glue:ListSchemas",
+            "glue:GetSchemaByDefinition",
+            "glue:GetSchemaVersion",
+            "glue:ListSchemaVersions",
+            "glue:GetSchemaVersionsDiff",
+            "glue:CheckSchemaVersionValidity",
+            "glue:QuerySchemaVersionMetadata",
+            "glue:GetTags"
+          ],
+          "Resource": [
+            "*"
+          ]
+        }
+      ]
+    },
+    "actions": [
+      "glue:CheckSchemaVersionValidity",
+      "glue:GetRegistry",
+      "glue:GetSchema",
+      "glue:GetSchemaByDefinition",
+      "glue:GetSchemaVersion",
+      "glue:GetSchemaVersionsDiff",
+      "glue:GetTags",
+      "glue:ListRegistries",
+      "glue:ListSchemaVersions",
+      "glue:ListSchemas",
+      "glue:QuerySchemaVersionMetadata"
+    ],
+    "services": [
+      "glue"
+    ],
+    "action_count": 11,
+    "query": "Allow read-only access to view and query schema registries, schemas, and schema versions, including checking schema version validity and retrieving associated metadata and tags."
+  }
+]

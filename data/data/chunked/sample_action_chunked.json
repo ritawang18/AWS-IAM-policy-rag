@@ -1,0 +1,343 @@
+[
+  {
+    "text": "IAM Action: acm:AddTagsToCertificate. Service: AWS Certificate Manager. Description: Grants permission to add one or more tags to a certificate. Access level: Tagging. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_addtagstocertificate",
+      "action": "acm:AddTagsToCertificate",
+      "action_name": "AddTagsToCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to add one or more tags to a certificate",
+      "access_level": "Tagging",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:DeleteCertificate. Service: AWS Certificate Manager. Description: Grants permission to delete a certificate and its associated private key. Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_deletecertificate",
+      "action": "acm:DeleteCertificate",
+      "action_name": "DeleteCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to delete a certificate and its associated private key",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:DescribeCertificate. Service: AWS Certificate Manager. Description: Grants permission to retreive a certificates and its metadata. Access level: Read. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_describecertificate",
+      "action": "acm:DescribeCertificate",
+      "action_name": "DescribeCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to retreive a certificates and its metadata",
+      "access_level": "Read",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:ExportCertificate. Service: AWS Certificate Manager. Description: Grants permission to export an exportable certificate for use anywhere. Access level: Read. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_exportcertificate",
+      "action": "acm:ExportCertificate",
+      "action_name": "ExportCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to export an exportable certificate for use anywhere",
+      "access_level": "Read",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:GetAccountConfiguration. Service: AWS Certificate Manager. Description: Grants permission to retrieve account level configuration from AWS Certificate Manager. Access level: Read. Applicable resource types: All resources. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_getaccountconfiguration",
+      "action": "acm:GetAccountConfiguration",
+      "action_name": "GetAccountConfiguration",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to retrieve account level configuration from AWS Certificate Manager",
+      "access_level": "Read",
+      "resource_types": [],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:GetCertificate. Service: AWS Certificate Manager. Description: Grants permission to retrieve a certificate and certificate chain for a certificate ARN. Access level: Read. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_getcertificate",
+      "action": "acm:GetCertificate",
+      "action_name": "GetCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to retrieve a certificate and certificate chain for a certificate ARN",
+      "access_level": "Read",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:ImportCertificate. Service: AWS Certificate Manager. Description: Grants permission to import a 3rd party certificate into AWS Certificate Manager (ACM). Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_importcertificate",
+      "action": "acm:ImportCertificate",
+      "action_name": "ImportCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to import a 3rd party certificate into AWS Certificate Manager (ACM)",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:ListCertificates. Service: AWS Certificate Manager. Description: Grants permission to retrieve a list of certificates for specific certificate parameters. Access level: List. Applicable resource types: All resources. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_listcertificates",
+      "action": "acm:ListCertificates",
+      "action_name": "ListCertificates",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to retrieve a list of certificates for specific certificate parameters",
+      "access_level": "List",
+      "resource_types": [],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:ListTagsForCertificate. Service: AWS Certificate Manager. Description: Grants permission to lists the tags that have been associated with a certificate. Access level: Read. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_listtagsforcertificate",
+      "action": "acm:ListTagsForCertificate",
+      "action_name": "ListTagsForCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to lists the tags that have been associated with a certificate",
+      "access_level": "Read",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:PutAccountConfiguration. Service: AWS Certificate Manager. Description: Grants permission to update account level configuration in AWS Certificate Manager. Access level: Write. Applicable resource types: All resources. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_putaccountconfiguration",
+      "action": "acm:PutAccountConfiguration",
+      "action_name": "PutAccountConfiguration",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to update account level configuration in AWS Certificate Manager",
+      "access_level": "Write",
+      "resource_types": [],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:RemoveTagsFromCertificate. Service: AWS Certificate Manager. Description: Grants permission to remove one or more tags from a certificate. Access level: Tagging. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_removetagsfromcertificate",
+      "action": "acm:RemoveTagsFromCertificate",
+      "action_name": "RemoveTagsFromCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to remove one or more tags from a certificate",
+      "access_level": "Tagging",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:RenewCertificate. Service: AWS Certificate Manager. Description: Grants permission to renew an eligible private certificate. Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_renewcertificate",
+      "action": "acm:RenewCertificate",
+      "action_name": "RenewCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to renew an eligible private certificate",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:RequestCertificate. Service: AWS Certificate Manager. Description: Grants permission to requests a public or private certificate. Access level: Write. Applicable resource types: All resources. Supported condition keys: aws:RequestTag/${TagKey}, aws:TagKeys, acm:DomainNames, acm:CertificateTransparencyLogging, acm:ValidationMethod, acm:KeyAlgorithm, acm:CertificateAuthority, acm:Export.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_requestcertificate",
+      "action": "acm:RequestCertificate",
+      "action_name": "RequestCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to requests a public or private certificate",
+      "access_level": "Write",
+      "resource_types": [],
+      "condition_keys": [
+        "aws:RequestTag/${TagKey}",
+        "aws:TagKeys",
+        "acm:DomainNames",
+        "acm:CertificateTransparencyLogging",
+        "acm:ValidationMethod",
+        "acm:KeyAlgorithm",
+        "acm:CertificateAuthority",
+        "acm:Export"
+      ],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:ResendValidationEmail. Service: AWS Certificate Manager. Description: Grants permission to resend an email to request domain ownership validation. Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_resendvalidationemail",
+      "action": "acm:ResendValidationEmail",
+      "action_name": "ResendValidationEmail",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to resend an email to request domain ownership validation",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:RevokeCertificate. Service: AWS Certificate Manager. Description: Grants permission to revoke an exportable certificate. Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_revokecertificate",
+      "action": "acm:RevokeCertificate",
+      "action_name": "RevokeCertificate",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to revoke an exportable certificate",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:SearchCertificates. Service: AWS Certificate Manager. Description: Grants permission to retrieve a list of certificates matching search criteria. Access level: List. Applicable resource types: All resources. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_searchcertificates",
+      "action": "acm:SearchCertificates",
+      "action_name": "SearchCertificates",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to retrieve a list of certificates matching search criteria",
+      "access_level": "List",
+      "resource_types": [],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: acm:UpdateCertificateOptions. Service: AWS Certificate Manager. Description: Grants permission to update a certificate configuration. Use this to specify whether to opt in to or out of certificate transparency logging. Access level: Write. Applicable resource types: certificate*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "acm_updatecertificateoptions",
+      "action": "acm:UpdateCertificateOptions",
+      "action_name": "UpdateCertificateOptions",
+      "service": "AWS Certificate Manager",
+      "service_prefix": "acm",
+      "description": "Grants permission to update a certificate configuration. Use this to specify whether to opt in to or out of certificate transparency logging",
+      "access_level": "Write",
+      "resource_types": [
+        "certificate*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: execute-api:InvalidateCache. Service: Amazon API Gateway. Description: Grants permission to invalidate API cache upon a client request. Access level: Write. Applicable resource types: execute-api-general*. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "execute-api_invalidatecache",
+      "action": "execute-api:InvalidateCache",
+      "action_name": "InvalidateCache",
+      "service": "Amazon API Gateway",
+      "service_prefix": "execute-api",
+      "description": "Grants permission to invalidate API cache upon a client request",
+      "access_level": "Write",
+      "resource_types": [
+        "execute-api-general*"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  },
+  {
+    "text": "IAM Action: execute-api:Invoke. Service: Amazon API Gateway. Description: Grants permission to invoke an API upon a client request. Access level: Write. Applicable resource types: execute-api-domain. Supported condition keys: None.",
+    "metadata": {
+      "type": "iam_action",
+      "doc_id": "execute-api_invoke",
+      "action": "execute-api:Invoke",
+      "action_name": "Invoke",
+      "service": "Amazon API Gateway",
+      "service_prefix": "execute-api",
+      "description": "Grants permission to invoke an API upon a client request",
+      "access_level": "Write",
+      "resource_types": [
+        "execute-api-domain"
+      ],
+      "condition_keys": [],
+      "dependent_actions": []
+    }
+  }
+]

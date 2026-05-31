@@ -1,0 +1,36 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Data — do not commit full corpus (too large)
+# Commit only sample files in data/raw/ and data/processed/
+data/processed/action_documents.json
+data/processed/managed_policies.json
+data/processed/chunking/action_chunks.json
+data/processed/chunking/policy_chunks.json
+
+# Indexes — binary files, regenerate with embedder.py
+indexes/
+
+# Results
+results/
+
+# Google Drive mount artifacts
+/content/
+
+# macOS
+.DS_Store

@@ -1,0 +1,1805 @@
+[
+  {
+    "policy_name": "AmazonRoute53ResolverReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Allow the service to retrieve information about security groups, virtual private clouds, subnets, and network interfaces to facilitate read-only access to network configurations and settings."
+  },
+  {
+    "policy_name": "CloudWatchLogsAPIKeyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "kms:Decrypt",
+      "logs:PutLogEvents",
+      "kms:DescribeKey",
+      "logs:CallWithBearerToken",
+      "kms:GenerateDataKey"
+    ],
+    "services": [
+      "kms",
+      "logs"
+    ],
+    "query": "Enable the service to securely send log data by allowing it to generate and decrypt data keys for encryption purposes. Additionally, permit the service to transmit log events and authenticate using a bearer token to ensure secure and authorized log data transmission."
+  },
+  {
+    "policy_name": "AmazonWorkMailReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:ListRoles",
+      "cloudwatch:GetMetricData",
+      "logs:DescribeLogGroups",
+      "lambda:ListFunctions"
+    ],
+    "services": [
+      "cloudwatch",
+      "iam",
+      "lambda",
+      "logs"
+    ],
+    "query": "Enable the ability to view and list roles, functions, and log groups, as well as retrieve metric data for monitoring and auditing purposes."
+  },
+  {
+    "policy_name": "CloudWatchLambdaInsightsExecutionRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream"
+    ],
+    "services": [
+      "logs"
+    ],
+    "query": "Enable the service to create and manage log groups and log streams, and to send log events for monitoring and diagnostics purposes."
+  },
+  {
+    "policy_name": "AWSEC2SqlHaInstancePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2messages:GetEndpoint",
+      "ec2messages:SendReply",
+      "ssmmessages:CreateDataChannel",
+      "ec2messages:AcknowledgeMessage",
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssmmessages:OpenDataChannel",
+      "ec2messages:DeleteMessage",
+      "secretsmanager:GetSecretValue",
+      "ec2messages:GetMessages",
+      "ec2messages:FailMessage",
+      "ssm:UpdateInstanceInformation"
+    ],
+    "services": [
+      "ec2messages",
+      "secretsmanager",
+      "ssm",
+      "ssmmessages"
+    ],
+    "query": "Enable secure and efficient communication between instances and a management service by allowing the retrieval and acknowledgment of messages, as well as the creation and management of data and control channels. Facilitate the retrieval of sensitive configuration data needed for operations by accessing stored secrets. Ensure the instance can update its status and information with the management service to maintain accurate monitoring and management."
+  },
+  {
+    "policy_name": "AWSObservabilityAdminLogsCentralizationServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "kms:Decrypt",
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "kms:Encrypt",
+      "logs:CreateLogGroup",
+      "kms:GenerateDataKey"
+    ],
+    "services": [
+      "kms",
+      "logs"
+    ],
+    "query": "Enable the service to manage and centralize log data by creating and managing log groups and streams, as well as encrypting and decrypting log data using encryption keys."
+  },
+  {
+    "policy_name": "AWSApplicationAutoscalingECSServicePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:UpdateService",
+      "ecs:DescribeServices",
+      "cloudwatch:GetMetricData",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm",
+      "cloudwatch:DeleteAlarms"
+    ],
+    "services": [
+      "cloudwatch",
+      "ecs"
+    ],
+    "query": "Enable the ability to manage and adjust the scaling of containerized applications by modifying service configurations and retrieving service details. Allow monitoring and management of performance metrics and alarms to ensure optimal application performance and resource utilization."
+  },
+  {
+    "policy_name": "AmazonECSTaskExecutionRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecr:BatchCheckLayerAvailability",
+      "logs:PutLogEvents",
+      "ecr:GetDownloadUrlForLayer",
+      "logs:CreateLogStream",
+      "ecr:GetAuthorizationToken",
+      "ecr:BatchGetImage"
+    ],
+    "services": [
+      "ecr",
+      "logs"
+    ],
+    "query": "Enable the execution of tasks by allowing access to retrieve container images from a container registry and send log data to a logging service."
+  },
+  {
+    "policy_name": "EC2ImageBuilderLifecycleExecutionPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateTags",
+      "ec2:DisableImage",
+      "ec2:DeregisterImage",
+      "ec2:EnableImage",
+      "ec2:EnableImageDeprecation",
+      "ec2:DisableImageDeprecation",
+      "tag:GetResources",
+      "ec2:DescribeImageAttribute",
+      "ec2:DeleteSnapshot",
+      "ec2:DeleteTags",
+      "ec2:DescribeImages",
+      "ecr:BatchGetImage",
+      "imagebuilder:DeleteImage",
+      "ecr:BatchDeleteImage"
+    ],
+    "services": [
+      "ec2",
+      "ecr",
+      "imagebuilder",
+      "tag"
+    ],
+    "query": "Enable the management of virtual machine images by allowing the creation, deletion, and modification of image tags and attributes. Facilitate the deprecation and deregistration of images, as well as the retrieval and deletion of container images. Support the querying of image resources and attributes to ensure efficient lifecycle management."
+  },
+  {
+    "policy_name": "AmazonFSxConsoleReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeNetworkInterfaceAttribute",
+      "ec2:DescribeSecurityGroups",
+      "ds:DescribeDirectories",
+      "ec2:DescribeVpcs",
+      "kms:DescribeKey",
+      "cloudwatch:GetMetricData",
+      "firehose:ListDeliveryStreams",
+      "logs:DescribeLogGroups",
+      "cloudwatch:DescribeAlarms",
+      "fsx:ListTagsForResource",
+      "ec2:GetSecurityGroupsForVpc",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "services": [
+      "cloudwatch",
+      "ds",
+      "ec2",
+      "firehose",
+      "fsx",
+      "kms",
+      "logs"
+    ],
+    "query": "Enable read-only access to view and retrieve information about network configurations, security settings, and directory services. Allow access to monitor and analyze performance metrics and alarms, as well as view logging configurations and delivery streams. Provide the ability to list tags associated with resources for auditing and management purposes."
+  },
+  {
+    "policy_name": "AWSLambdaManagedEC2ResourceOperator",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "ec2:CreateTags",
+      "ec2:AttachNetworkInterface",
+      "ec2:DescribeSecurityGroups",
+      "ec2:RunInstances",
+      "ec2:DescribeInstanceTypes",
+      "ec2:DescribeInstanceTypeOfferings",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeInstances",
+      "ec2:DescribeCapacityReservations",
+      "ec2:DescribeSubnets",
+      "ec2:CreateNetworkInterface"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the service to manage and operate virtual machine instances, including launching new instances, attaching network interfaces, and tagging resources. Allow the service to gather information about instance statuses, security groups, instance types, availability zones, capacity reservations, and subnets to ensure proper configuration and operation of the instances."
+  },
+  {
+    "policy_name": "AmazonSSMPatchAssociation",
+    "source": "aws_managed_dev",
+    "actions": [
+      "tag:GetResources",
+      "ssm:GetPatchBaseline",
+      "ssm:DescribePatchBaselines",
+      "ssm:DescribeEffectivePatchesForPatchBaseline"
+    ],
+    "services": [
+      "ssm",
+      "tag"
+    ],
+    "query": "Enable the ability to retrieve and list patch baselines and their effective patches, as well as access resource tagging information, to facilitate the management and application of patches across systems."
+  },
+  {
+    "policy_name": "AWSCloud9SSMInstanceProfile",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssmmessages:CreateDataChannel",
+      "ssmmessages:CreateControlChannel",
+      "ssmmessages:OpenDataChannel",
+      "ssmmessages:OpenControlChannel",
+      "ssm:UpdateInstanceInformation"
+    ],
+    "services": [
+      "ssm",
+      "ssmmessages"
+    ],
+    "query": "Enable the service to establish and manage secure communication channels for data and control messages, and update instance information as needed."
+  },
+  {
+    "policy_name": "EC2InstanceProfileForImageBuilderECRContainerBuilds",
+    "source": "aws_managed_dev",
+    "actions": [
+      "imagebuilder:GetContainerRecipe",
+      "kms:Decrypt",
+      "ecr:CompleteLayerUpload",
+      "imagebuilder:GetComponent",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage",
+      "logs:PutLogEvents",
+      "ecr:GetDownloadUrlForLayer",
+      "logs:CreateLogStream",
+      "ecr:GetAuthorizationToken",
+      "ecr:UploadLayerPart",
+      "s3:GetObject",
+      "ecr:BatchGetImage",
+      "ecr:InitiateLayerUpload",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "ecr",
+      "imagebuilder",
+      "kms",
+      "logs",
+      "s3"
+    ],
+    "query": "Enable the service to build and manage container images by retrieving necessary components and recipes, uploading and managing image layers, and storing the final images. Allow the service to securely access encrypted data, log relevant events, and retrieve objects from storage as needed for the image building process."
+  },
+  {
+    "policy_name": "AmazonAuroraDSQLReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "dsql:ListClusters",
+      "dsql:GetVpcEndpointServiceName",
+      "dsql:ListTagsForResource",
+      "cloudwatch:GetMetricData",
+      "dsql:GetCluster",
+      "dsql:GetClusterPolicy"
+    ],
+    "services": [
+      "cloudwatch",
+      "dsql"
+    ],
+    "query": "Enable read-only access to view and retrieve information about database clusters, including their configurations, tags, and associated metrics, to monitor and analyze database performance and setup."
+  },
+  {
+    "policy_name": "AWSLambdaENIManagementAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:AssignPrivateIpAddresses",
+      "ec2:DeleteNetworkInterface",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:UnassignPrivateIpAddresses",
+      "ec2:CreateNetworkInterface"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the management of network interfaces by allowing the creation, deletion, and modification of network interfaces, including assigning and unassigning private IP addresses, to facilitate seamless network connectivity and configuration."
+  },
+  {
+    "policy_name": "AmazonRedshiftReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInternetGateways",
+      "redshift:ViewQueriesInConsole",
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeAddresses",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeAccountAttributes",
+      "redshift:ListRecommendations",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "redshift"
+    ],
+    "query": "Enable read-only access to view and list queries, recommendations, and various network configurations related to the infrastructure. This includes the ability to view details about internet gateways, security groups, IP addresses, VPCs, availability zones, account attributes, and subnets."
+  },
+  {
+    "policy_name": "AmazonKeyspacesReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "cassandra:ListStreams",
+      "application-autoscaling:DescribeScalingPolicies",
+      "application-autoscaling:DescribeScheduledActions",
+      "cassandra:GetShardIterator",
+      "kms:DescribeKey",
+      "cloudwatch:GetMetricData",
+      "application-autoscaling:DescribeScalableTargets",
+      "cassandra:GetStream",
+      "cloudwatch:DescribeAlarms",
+      "application-autoscaling:DescribeScalingActivities",
+      "kms:ListAliases",
+      "cassandra:GetRecords",
+      "cassandra:Select"
+    ],
+    "services": [
+      "application-autoscaling",
+      "cassandra",
+      "cloudwatch",
+      "kms"
+    ],
+    "query": "Enable read-only access to query and retrieve data from a managed database service, including the ability to list and describe streams, get shard iterators, and select records. Allow monitoring of database performance by accessing metric data and describing alarms. Provide capabilities to view scaling policies, scheduled actions, scalable targets, and scaling activities for resource management, as well as describe encryption keys and list key aliases for security purposes."
+  },
+  {
+    "policy_name": "AWSAutoScalingPlansEC2AutoScalingPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "autoscaling:BatchPutScheduledUpdateGroupAction",
+      "autoscaling:DescribeScheduledActions",
+      "cloudwatch:GetMetricData",
+      "autoscaling:DescribeAutoScalingGroups",
+      "autoscaling:BatchDeleteScheduledAction"
+    ],
+    "services": [
+      "autoscaling",
+      "cloudwatch"
+    ],
+    "query": "Enable the management and execution of scheduled scaling actions for a group of virtual machine instances. This includes the ability to create, update, delete, and retrieve information about these scheduled actions, as well as access performance metrics to inform scaling decisions."
+  },
+  {
+    "policy_name": "EC2FleetTimeShiftableServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateFleet",
+      "iam:PassRole",
+      "ec2:CreateTags",
+      "ec2:TerminateInstances",
+      "ec2:RunInstances",
+      "ec2:DescribeInstances",
+      "ec2:DescribeImages",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "iam"
+    ],
+    "query": "Enable the management of virtual machine fleets by allowing the creation, tagging, and termination of instances. Additionally, allow the retrieval of information about instances, images, and subnets to ensure proper configuration and operation of the fleet."
+  },
+  {
+    "policy_name": "AWSFaultInjectionSimulatorSSMAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:PassRole",
+      "ssm:ListCommands",
+      "ssm:GetAutomationExecution",
+      "ssm:CancelCommand",
+      "ssm:StopAutomationExecution",
+      "ssm:SendCommand",
+      "ssm:StartAutomationExecution"
+    ],
+    "services": [
+      "iam",
+      "ssm"
+    ],
+    "query": "Enable the execution and management of automation tasks and commands, including starting, stopping, and canceling operations. Allow the listing and retrieval of command and automation execution details to facilitate monitoring and control of processes."
+  },
+  {
+    "policy_name": "AmazonECSInfrastructureRolePolicyForVolumes",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateTags",
+      "ec2:DetachVolume",
+      "ec2:CreateVolume",
+      "ec2:AttachVolume",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeInstances",
+      "ec2:DeleteVolume",
+      "ec2:DescribeVolumes"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the management of storage volumes by allowing the creation, attachment, detachment, and deletion of volumes, as well as the ability to tag them. Additionally, provide the capability to retrieve information about availability zones, instances, and existing volumes to ensure proper volume management and allocation."
+  },
+  {
+    "policy_name": "AmazonCognitoReadOnly",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:ListRoles",
+      "iam:ListOpenIdConnectProviders",
+      "sns:ListPlatformApplications"
+    ],
+    "services": [
+      "iam",
+      "sns"
+    ],
+    "query": "Enable the ability to view and list roles, OpenID Connect providers, and platform applications for monitoring and auditing purposes. This allows for the assessment of existing configurations and integrations without making any modifications."
+  },
+  {
+    "policy_name": "AmazonSSMAutomationApproverAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssm:DescribeAutomationExecutions",
+      "ssm:SendAutomationSignal",
+      "ssm:GetAutomationExecution"
+    ],
+    "services": [
+      "ssm"
+    ],
+    "query": "Enable the ability to review and monitor the status of automation executions, send signals to control the flow of automation processes, and retrieve detailed information about specific automation executions."
+  },
+  {
+    "policy_name": "AWSOutpostsServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeSecurityGroups",
+      "ec2:CreateSecurityGroup",
+      "ec2:DescribeVpcEndpoints",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:CreateNetworkInterface"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the service to manage network configurations by allowing it to create and describe security groups and network interfaces. Additionally, provide the ability to describe VPC endpoints and subnets to ensure proper network setup and connectivity."
+  },
+  {
+    "policy_name": "AWSEC2SpotServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:PassRole",
+      "ec2:CreateTags",
+      "ec2:RunInstances",
+      "ec2:StopInstances",
+      "ec2:DescribeInstances",
+      "ec2:StartInstances"
+    ],
+    "services": [
+      "ec2",
+      "iam"
+    ],
+    "query": "Enable the service to manage and operate instances by allowing it to start, stop, and run instances as needed. Additionally, allow the service to create tags for organizational purposes and describe instances to retrieve their status and details."
+  },
+  {
+    "policy_name": "AmazonElasticContainerRegistryPublicPowerUser",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecr-public:DescribeImageTags",
+      "ecr-public:GetRegistryCatalogData",
+      "ecr-public:GetRepositoryCatalogData",
+      "ecr-public:DescribeRegistries",
+      "ecr-public:PutImage",
+      "ecr-public:CompleteLayerUpload",
+      "ecr-public:InitiateLayerUpload",
+      "ecr-public:DescribeRepositories",
+      "ecr-public:UploadLayerPart",
+      "ecr-public:BatchCheckLayerAvailability",
+      "ecr-public:GetRepositoryPolicy",
+      "sts:GetServiceBearerToken",
+      "ecr-public:GetAuthorizationToken",
+      "ecr-public:DescribeImages"
+    ],
+    "services": [
+      "ecr-public",
+      "sts"
+    ],
+    "query": "Enable the ability to manage and interact with public container image repositories by allowing actions such as uploading and managing images, retrieving repository and registry data, and checking image and layer availability. This includes permissions to initiate and complete image uploads, describe repositories and images, and access necessary authorization tokens for these operations."
+  },
+  {
+    "policy_name": "AmazonEC2ReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "cloudwatch:GetMetricStatistics",
+      "cloudwatch:ListMetrics",
+      "ec2:GetSecurityGroupsForVpc"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2"
+    ],
+    "query": "Enable the service to retrieve and view performance metrics and statistics, list available metrics, and access security group information within a specific virtual private cloud for monitoring and analysis purposes."
+  },
+  {
+    "policy_name": "CloudWatchNetworkFlowMonitorTopologyServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeTransitGatewayVpcAttachments",
+      "ec2:DescribeTransitGatewayAttachments",
+      "ec2:DescribeVpnConnections",
+      "ec2:GetTransitGatewayRouteTablePropagations",
+      "ec2:DescribeManagedPrefixLists",
+      "ec2:DescribeVpcEndpoints",
+      "ec2:DescribeTransitGatewayConnects",
+      "ec2:DescribeTransitGatewayPeeringAttachments",
+      "ec2:GetTransitGatewayRouteTableAssociations",
+      "ec2:SearchTransitGatewayRoutes",
+      "ec2:GetManagedPrefixListEntries",
+      "ec2:DescribeTransitGateways",
+      "ec2:DescribeVpcEndpointServiceConfigurations",
+      "ec2:DescribeTransitGatewayRouteTables",
+      "ec2:DescribeCustomerGateways"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the service to retrieve detailed information about network configurations and connections, including transit gateways, VPN connections, VPC endpoints, and customer gateways. This is necessary for monitoring and analyzing network flow and topology within the infrastructure."
+  },
+  {
+    "policy_name": "AWSFaultInjectionSimulatorRDSAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "rds:FailoverDBCluster",
+      "tag:GetResources",
+      "rds:DescribeDBInstances",
+      "rds:DescribeDBClusters",
+      "rds:RebootDBInstance"
+    ],
+    "services": [
+      "rds",
+      "tag"
+    ],
+    "query": "Enable the ability to simulate failures and test the resilience of database clusters by allowing failover operations. Provide permissions to retrieve information about database instances and clusters, as well as access resource tagging details to support comprehensive testing scenarios."
+  },
+  {
+    "policy_name": "AWSEC2VssSnapshotPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateSnapshots",
+      "ec2:CreateTags",
+      "ec2:DescribeInstanceAttribute",
+      "ec2:CreateImage",
+      "ec2:DescribeSnapshots",
+      "ec2:DescribeImages"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the creation and management of snapshots and images for virtual server instances, including the ability to tag these resources and retrieve information about instance attributes, snapshots, and images."
+  },
+  {
+    "policy_name": "AWSXrayCrossAccountSharingConfiguration",
+    "source": "aws_managed_dev",
+    "actions": [
+      "oam:ListLinks",
+      "oam:CreateLink",
+      "oam:TagResource",
+      "xray:Link",
+      "oam:UpdateLink",
+      "oam:GetLink",
+      "oam:DeleteLink"
+    ],
+    "services": [
+      "oam",
+      "xray"
+    ],
+    "query": "Enable the configuration and management of cross-account sharing by allowing the creation, updating, retrieval, tagging, and deletion of links between resources. This facilitates the integration and sharing of data across different accounts for monitoring and analysis purposes."
+  },
+  {
+    "policy_name": "DeclarativePoliciesEC2Report",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:GetInstanceMetadataDefaults",
+      "ec2:GetImageBlockPublicAccessState",
+      "ec2:GetSerialConsoleAccessStatus",
+      "ec2:GetSnapshotBlockPublicAccessState",
+      "ec2:DescribeVpcBlockPublicAccessOptions",
+      "ec2:GetAllowedImagesSettings",
+      "ec2:DescribeRegions"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the retrieval of configuration and access settings related to instances, images, snapshots, and VPCs, as well as the ability to gather information about available regions. This is necessary for generating reports on the current state and access configurations of these resources."
+  },
+  {
+    "policy_name": "AmazonWorkDocsReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeSubnets",
+      "ec2:DescribeVpcs",
+      "ds:DescribeDirectories"
+    ],
+    "services": [
+      "ds",
+      "ec2"
+    ],
+    "query": "Allow read-only access to view information about subnets and VPCs, as well as to retrieve details about directories. This is necessary for monitoring and auditing network configurations and directory services without making any modifications."
+  },
+  {
+    "policy_name": "AmazonRDSPerformanceInsightsReadOnly",
+    "source": "aws_managed_dev",
+    "actions": [
+      "rds:ListTagsForResource",
+      "pi:ListPerformanceAnalysisReports",
+      "pi:ListAvailableResourceDimensions",
+      "pi:GetResourceMetrics",
+      "rds:DescribeDBInstances",
+      "pi:ListAvailableResourceMetrics",
+      "pi:GetDimensionKeyDetails",
+      "pi:DescribeDimensionKeys",
+      "pi:GetPerformanceAnalysisReport",
+      "pi:ListTagsForResource",
+      "rds:DescribeDBShardGroups",
+      "rds:DescribeDBClusters",
+      "pi:GetResourceMetadata"
+    ],
+    "services": [
+      "pi",
+      "rds"
+    ],
+    "query": "Enable read-only access to performance insights and metadata for database instances and clusters. This includes the ability to view performance metrics, analysis reports, resource dimensions, and associated tags to support monitoring and analysis of database performance."
+  },
+  {
+    "policy_name": "AWSCodeDeployRoleForECSLimited",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:UpdateServicePrimaryTaskSet",
+      "elasticloadbalancing:DescribeRules",
+      "ecs:CreateTaskSet",
+      "elasticloadbalancing:DescribeListeners",
+      "iam:PassRole",
+      "sns:Publish",
+      "ecs:DescribeServices",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "ecs:DeleteTaskSet",
+      "elasticloadbalancing:ModifyRule",
+      "s3:GetObject",
+      "cloudwatch:DescribeAlarms",
+      "elasticloadbalancing:ModifyListener",
+      "s3:GetObjectVersion",
+      "lambda:InvokeFunction"
+    ],
+    "services": [
+      "cloudwatch",
+      "ecs",
+      "elasticloadbalancing",
+      "iam",
+      "lambda",
+      "s3",
+      "sns"
+    ],
+    "query": "Enable the deployment and management of application updates by allowing the creation, updating, and deletion of task sets within a container service. Allow the retrieval and modification of load balancer configurations and rules to ensure proper traffic routing. Permit access to retrieve objects from storage, publish notifications, invoke functions, and describe alarms for monitoring and alerting purposes."
+  },
+  {
+    "policy_name": "AmazonEC2ContainerServiceRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "elasticloadbalancing:DeregisterTargets",
+      "elasticloadbalancing:DeregisterInstancesFromLoadBalancer",
+      "ec2:AuthorizeSecurityGroupIngress",
+      "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+      "elasticloadbalancing:RegisterTargets"
+    ],
+    "services": [
+      "ec2",
+      "elasticloadbalancing"
+    ],
+    "query": "Enable the management of load balancer targets and security group rules to facilitate the registration and deregistration of instances or targets with load balancers, as well as the authorization of inbound traffic to security groups."
+  },
+  {
+    "policy_name": "AmazonKeyspacesReadOnlyAccess_v2",
+    "source": "aws_managed_dev",
+    "actions": [
+      "cassandra:ListStreams",
+      "application-autoscaling:DescribeScalingPolicies",
+      "application-autoscaling:DescribeScheduledActions",
+      "cassandra:GetShardIterator",
+      "kms:DescribeKey",
+      "cloudwatch:GetMetricData",
+      "application-autoscaling:DescribeScalableTargets",
+      "ec2:DescribeVpcEndpoints",
+      "cassandra:GetStream",
+      "cloudwatch:DescribeAlarms",
+      "application-autoscaling:DescribeScalingActivities",
+      "kms:ListAliases",
+      "ec2:DescribeNetworkInterfaces",
+      "cassandra:GetRecords",
+      "cassandra:Select"
+    ],
+    "services": [
+      "application-autoscaling",
+      "cassandra",
+      "cloudwatch",
+      "ec2",
+      "kms"
+    ],
+    "query": "The service requires the ability to read and retrieve data from a managed database, including listing streams, getting records, and selecting data. It also needs to monitor and analyze performance metrics, describe alarms, and access details about network interfaces and VPC endpoints for connectivity insights. Additionally, the service must be able to view key management configurations and scaling policies to ensure secure and efficient resource management."
+  },
+  {
+    "policy_name": "IAMReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:GenerateServiceLastAccessedDetails",
+      "iam:GenerateCredentialReport",
+      "iam:SimulateCustomPolicy",
+      "iam:SimulatePrincipalPolicy"
+    ],
+    "services": [
+      "iam"
+    ],
+    "query": "Enable the ability to generate reports and simulations to analyze access patterns and credential usage without making any changes to the configurations. This includes generating detailed reports on when services were last accessed, creating credential reports, and simulating the effects of custom and principal policies to understand permissions and access outcomes."
+  },
+  {
+    "policy_name": "AWSLambdaReplicator",
+    "source": "aws_managed_dev",
+    "actions": [
+      "lambda:CreateFunction",
+      "iam:PassRole",
+      "lambda:DeleteFunction",
+      "cloudfront:ListDistributionsByLambdaFunction",
+      "lambda:DisableReplication"
+    ],
+    "services": [
+      "cloudfront",
+      "iam",
+      "lambda"
+    ],
+    "query": "Enable the creation and deletion of functions, manage replication settings, and list associated distributions."
+  },
+  {
+    "policy_name": "AmazonEC2ContainerServiceAutoscaleRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:UpdateService",
+      "ecs:DescribeServices",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm"
+    ],
+    "services": [
+      "cloudwatch",
+      "ecs"
+    ],
+    "query": "Enable the management and scaling of container-based applications by allowing the adjustment of service configurations and monitoring of performance metrics. This includes updating service parameters, retrieving service details, and managing performance alarms to ensure optimal scaling and resource utilization."
+  },
+  {
+    "policy_name": "AmazonEC2RoleforAWSCodeDeployLimited",
+    "source": "aws_managed_dev",
+    "actions": [
+      "s3:GetObjectVersion",
+      "s3:GetObject",
+      "s3:ListBucket"
+    ],
+    "services": [
+      "s3"
+    ],
+    "query": "The service requires permissions to retrieve specific versions of objects, access objects, and list the contents of a storage bucket to facilitate deployment processes."
+  },
+  {
+    "policy_name": "AWS-SSM-RemediationAutomation-OperationalAccountAdministrationRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "organizations:ListRoots",
+      "sts:AssumeRole",
+      "organizations:ListChildren"
+    ],
+    "services": [
+      "organizations",
+      "sts"
+    ],
+    "query": "Enable the service to retrieve information about the root organizational unit and its child organizational units within an account hierarchy. Allow the service to assume a specific role for executing automated remediation tasks across accounts."
+  },
+  {
+    "policy_name": "DynamoDBGlobalTableSettingsManagementServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "application-autoscaling:DescribeScalingPolicies",
+      "application-autoscaling:DeleteScalingPolicy",
+      "iam:CreateServiceLinkedRole",
+      "application-autoscaling:DescribeScalableTargets",
+      "application-autoscaling:DeregisterScalableTarget",
+      "application-autoscaling:PutScalingPolicy",
+      "application-autoscaling:RegisterScalableTarget"
+    ],
+    "services": [
+      "application-autoscaling",
+      "iam"
+    ],
+    "query": "Enable the management of scaling settings for global tables by allowing the creation, updating, and deletion of scaling policies and scalable targets. This includes the ability to describe current scaling configurations and manage service-linked roles necessary for these operations."
+  },
+  {
+    "policy_name": "AWSLambdaServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "ec2:DescribeInstances",
+      "ec2:TerminateInstances"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the service to retrieve the status and details of instances, as well as terminate instances when necessary. This is essential for managing and maintaining the lifecycle of instances effectively."
+  },
+  {
+    "policy_name": "AmazonEC2ContainerServiceEventsRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:TagResource",
+      "iam:PassRole",
+      "ecs:RunTask"
+    ],
+    "services": [
+      "ecs",
+      "iam"
+    ],
+    "query": "Enable the service to initiate and execute tasks within a container orchestration environment, allowing it to apply metadata tags to resources for organization and management purposes."
+  },
+  {
+    "policy_name": "EC2InstanceProfileForImageBuilder",
+    "source": "aws_managed_dev",
+    "actions": [
+      "kms:Decrypt",
+      "ec2:CreateTags",
+      "imagebuilder:GetComponent",
+      "logs:PutLogEvents",
+      "logs:CreateLogGroup",
+      "ec2:CreateSnapshot",
+      "logs:CreateLogStream",
+      "imagebuilder:GetMarketplaceResource",
+      "ec2:DescribeSnapshots",
+      "s3:GetObject",
+      "ec2:DescribeVolumes"
+    ],
+    "services": [
+      "ec2",
+      "imagebuilder",
+      "kms",
+      "logs",
+      "s3"
+    ],
+    "query": "Enable the creation and management of virtual machine images by allowing the service to access and retrieve necessary components, manage snapshots, and tag resources. Ensure secure handling of encrypted data by permitting decryption operations, and facilitate logging by creating and managing log groups and streams. Allow retrieval of objects from storage for use in image creation processes."
+  },
+  {
+    "policy_name": "AWSDataLifecycleManagerSSMFullAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssm:ListCommands",
+      "ssm:GetDocument",
+      "ssm:GetCommandInvocation",
+      "ssm:DescribeInstanceInformation",
+      "ssm:SendCommand",
+      "ssm:DescribeDocument"
+    ],
+    "services": [
+      "ssm"
+    ],
+    "query": "Enable the service to manage and execute commands on instances by retrieving necessary command and document information, sending commands, and describing instance details to ensure proper lifecycle management."
+  },
+  {
+    "policy_name": "QuickSightAccessForS3StorageManagementAnalyticsReadOnly",
+    "source": "aws_managed_dev",
+    "actions": [
+      "s3:ListAllMyBuckets",
+      "s3:GetBucketLocation",
+      "s3:GetAnalyticsConfiguration",
+      "s3:GetObject"
+    ],
+    "services": [
+      "s3"
+    ],
+    "query": "Enable read-only access to view and retrieve analytics configurations and objects from storage buckets. Additionally, allow the listing of all storage buckets and retrieval of their location information for analysis purposes."
+  },
+  {
+    "policy_name": "CloudWatchLogsReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:StartLiveTail",
+      "logs:StopQuery",
+      "cloudwatch:GenerateQueryResultsSummary",
+      "logs:StopLiveTail",
+      "logs:StartQuery",
+      "logs:TestMetricFilter",
+      "logs:FilterLogEvents",
+      "observabilityadmin:ListTelemetryPipelines",
+      "cloudwatch:GenerateQuery",
+      "observabilityadmin:GetS3TableIntegration",
+      "observabilityadmin:ListS3TableIntegrations"
+    ],
+    "services": [
+      "cloudwatch",
+      "logs",
+      "observabilityadmin"
+    ],
+    "query": "Enable the ability to perform read-only operations on log data, including starting and stopping live log tailing, executing and managing queries, and filtering log events. Additionally, allow access to list and retrieve telemetry pipeline configurations and S3 table integrations for monitoring and analysis purposes."
+  },
+  {
+    "policy_name": "AmazonKinesisAnalyticsReadOnly",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:ListRoles",
+      "iam:ListPolicyVersions",
+      "kinesis:DescribeStream",
+      "cloudwatch:GetMetricStatistics",
+      "firehose:DescribeDeliveryStream",
+      "firehose:ListDeliveryStreams",
+      "cloudwatch:ListMetrics",
+      "kinesis:ListStreams",
+      "logs:GetLogEvents"
+    ],
+    "services": [
+      "cloudwatch",
+      "firehose",
+      "iam",
+      "kinesis",
+      "logs"
+    ],
+    "query": "Enable the ability to view and list details of data streams, delivery streams, and associated metrics and logs for monitoring and analysis purposes. This includes accessing stream descriptions, delivery stream configurations, retrieving metric statistics, and viewing log events to ensure comprehensive read-only access to data flow and performance insights."
+  },
+  {
+    "policy_name": "Ec2ImageBuilderCrossAccountDistributionAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeImages",
+      "ec2:CopyImage",
+      "ec2:CreateTags",
+      "ec2:ModifyImageAttribute"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the ability to view and replicate virtual machine images, apply metadata to these images, and adjust their sharing settings to facilitate distribution across different accounts."
+  },
+  {
+    "policy_name": "AWSLambdaBasicDurableExecutionRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "lambda:GetDurableExecutionState",
+      "logs:CreateLogStream",
+      "lambda:CheckpointDurableExecution",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "lambda",
+      "logs"
+    ],
+    "query": "Enable the service to manage and store execution states durably while also allowing it to create and manage log groups and streams, and to record log events for monitoring and debugging purposes."
+  },
+  {
+    "policy_name": "AWSXrayWriteOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "xray:GetSamplingRules",
+      "xray:PutTelemetryRecords",
+      "xray:GetSamplingStatisticSummaries",
+      "xray:PutTraceSegments",
+      "xray:GetSamplingTargets"
+    ],
+    "services": [
+      "xray"
+    ],
+    "query": "Enable the service to send telemetry data and trace segments for monitoring and analysis. Allow the service to retrieve sampling rules and targets to manage and optimize data collection effectively."
+  },
+  {
+    "policy_name": "AmazonMSKReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeVpcs",
+      "kms:DescribeKey",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "kms"
+    ],
+    "query": "Allow the service to retrieve configuration details and metadata about network resources, such as security groups, VPCs, network interfaces, and subnets, as well as to view information about encryption keys. This is necessary for monitoring and auditing purposes without making any modifications to the resources."
+  },
+  {
+    "policy_name": "AWSSecretsManagerClientReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "secretsmanager:DescribeSecret",
+      "kms:Decrypt",
+      "secretsmanager:GetSecretValue"
+    ],
+    "services": [
+      "kms",
+      "secretsmanager"
+    ],
+    "query": "Allow the service to retrieve and view details of secrets, including accessing the current values of secrets, for read-only purposes. This includes the ability to decrypt secrets using the associated encryption keys."
+  },
+  {
+    "policy_name": "CloudWatchEventsBuiltInTargetExecutionAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:TerminateInstances",
+      "ec2:CreateSnapshot",
+      "ec2:RebootInstances",
+      "ec2:StopInstances"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the service to manage the lifecycle of instances by allowing it to terminate, reboot, and stop instances as needed. Additionally, allow the service to create snapshots of instances to ensure data backup and recovery capabilities."
+  },
+  {
+    "policy_name": "AWSECRPullThroughCache_ServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecr:CompleteLayerUpload",
+      "ecr:BatchImportUpstreamImage",
+      "ecr:GetImageCopyStatus",
+      "ecr:BatchCheckLayerAvailability",
+      "ecr:PutImage",
+      "ecr:GetDownloadUrlForLayer",
+      "ecr:GetAuthorizationToken",
+      "ecr:UploadLayerPart",
+      "secretsmanager:GetSecretValue",
+      "ecr:BatchGetImage",
+      "ecr:InitiateLayerUpload"
+    ],
+    "services": [
+      "ecr",
+      "secretsmanager"
+    ],
+    "query": "Enable the service to manage and retrieve container images from an external source, ensuring it can upload, check, and complete image layers, as well as manage image metadata. Additionally, allow the service to securely access necessary credentials for authentication and authorization purposes."
+  },
+  {
+    "policy_name": "AWSXRayDaemonWriteAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "xray:GetSamplingRules",
+      "xray:PutTelemetryRecords",
+      "xray:GetSamplingStatisticSummaries",
+      "xray:PutTraceSegments",
+      "xray:GetSamplingTargets"
+    ],
+    "services": [
+      "xray"
+    ],
+    "query": "Enable the service to collect and send trace data and telemetry records for analysis, including retrieving sampling rules and statistics to optimize data collection."
+  },
+  {
+    "policy_name": "AWSSSMOpsInsightsServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssm:UpdateOpsItem",
+      "ssm:CreateOpsItem",
+      "ssm:GetOpsItem",
+      "ssm:AddTagsToResource"
+    ],
+    "services": [
+      "ssm"
+    ],
+    "query": "Enable the service to create, update, and retrieve operational items, as well as add tags to these resources, in order to manage and organize operational insights effectively."
+  },
+  {
+    "policy_name": "ROSAKMSProviderPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "kms:Decrypt",
+      "kms:DescribeKey",
+      "kms:Encrypt"
+    ],
+    "services": [
+      "kms"
+    ],
+    "query": "Enable the service to perform encryption and decryption operations using a specific key, as well as retrieve metadata about the key. This is necessary for securely handling sensitive data by encrypting it before storage and decrypting it when needed, while also allowing the service to verify key details."
+  },
+  {
+    "policy_name": "AWS-SSM-RemediationAutomation-AdministrationRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "kms:Decrypt",
+      "iam:PassRole",
+      "s3:DeleteObject",
+      "s3:ListBucket",
+      "ssm:GetAutomationExecution",
+      "ssm:DescribeAutomationExecutions",
+      "sts:AssumeRole",
+      "ssm:DescribeAutomationStepExecutions",
+      "s3:GetObject",
+      "s3:PutObject",
+      "ssm:StartAutomationExecution",
+      "kms:GenerateDataKey"
+    ],
+    "services": [
+      "iam",
+      "kms",
+      "s3",
+      "ssm",
+      "sts"
+    ],
+    "query": "Enable the execution and management of automated remediation processes by allowing access to retrieve, list, and modify objects in storage, as well as start and monitor automation executions. Additionally, provide the capability to decrypt and generate encryption keys for secure data handling, and ensure the necessary roles can be assumed to facilitate these operations."
+  },
+  {
+    "policy_name": "AmazonSQSReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "sqs:ListMessageMoveTasks",
+      "sqs:GetQueueUrl",
+      "sqs:ListDeadLetterSourceQueues",
+      "sqs:ListQueueTags",
+      "sqs:GetQueueAttributes",
+      "sqs:ListQueues"
+    ],
+    "services": [
+      "sqs"
+    ],
+    "query": "Enable read-only access to message queues, allowing the retrieval of queue URLs, attributes, and tags. Additionally, allow listing of all queues, including dead-letter source queues, and access to view message move tasks."
+  },
+  {
+    "policy_name": "AWS-SSM-DiagnosisAutomation-OperationalAccountAdministrationRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "organizations:ListRoots",
+      "sts:AssumeRole",
+      "organizations:ListChildren"
+    ],
+    "services": [
+      "organizations",
+      "sts"
+    ],
+    "query": "Enable the ability to retrieve information about the root organizational unit and its child accounts to facilitate operational account administration tasks."
+  },
+  {
+    "policy_name": "AmazonECSInstanceRolePolicyForManagedInstances",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:DiscoverPollEndpoint",
+      "ecs:Poll",
+      "ecs:SubmitTaskStateChange",
+      "ecs:RegisterContainerInstance",
+      "ecs:StartTelemetrySession",
+      "ecs:PutSystemLogEvents",
+      "ecs:SubmitAttachmentStateChanges"
+    ],
+    "services": [
+      "ecs"
+    ],
+    "query": "Enable the service to communicate with the orchestration system by allowing it to register instances, report status updates, and submit telemetry data. This includes the ability to discover endpoints, poll for tasks, and log system events to ensure proper monitoring and management of container instances."
+  },
+  {
+    "policy_name": "AWSQuickSetupSSMLifecycleManagementExecutionPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssm:StartAutomationExecution",
+      "iam:PassRole",
+      "ssm:AddTagsToResource",
+      "ssm:GetAutomationExecution"
+    ],
+    "services": [
+      "iam",
+      "ssm"
+    ],
+    "query": "Enable the execution and management of automated processes, including starting automation tasks and retrieving their execution status. Allow the addition of tags to resources for better organization and tracking."
+  },
+  {
+    "policy_name": "AmazonECSInfrastructureRolePolicyForServiceConnectTransportLayerSecurity",
+    "source": "aws_managed_dev",
+    "actions": [
+      "secretsmanager:DeleteSecret",
+      "acm-pca:DescribeCertificateAuthority",
+      "secretsmanager:UpdateSecretVersionStage",
+      "acm-pca:IssueCertificate",
+      "secretsmanager:RotateSecret",
+      "secretsmanager:CreateSecret",
+      "secretsmanager:TagResource",
+      "acm-pca:GetCertificate",
+      "secretsmanager:GetSecretValue",
+      "secretsmanager:PutSecretValue",
+      "secretsmanager:DescribeSecret",
+      "secretsmanager:UpdateSecret",
+      "acm-pca:GetCertificateAuthorityCertificate"
+    ],
+    "services": [
+      "acm-pca",
+      "secretsmanager"
+    ],
+    "query": "Enable secure management and utilization of sensitive data by allowing the creation, retrieval, updating, rotation, and deletion of secret information. Additionally, facilitate the issuance and retrieval of certificates from a certificate authority to ensure encrypted communication and data protection."
+  },
+  {
+    "policy_name": "CloudWatchInternetMonitorServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "workspaces:DescribeWorkspaceDirectories",
+      "logs:PutLogEvents",
+      "ec2:DescribeVpcs",
+      "logs:CreateLogStream",
+      "cloudwatch:PutMetricData",
+      "cloudfront:GetDistribution",
+      "logs:DescribeLogStreams",
+      "elasticloadbalancing:DescribeLoadBalancers",
+      "logs:CreateLogGroup",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "services": [
+      "cloudfront",
+      "cloudwatch",
+      "ec2",
+      "elasticloadbalancing",
+      "logs",
+      "workspaces"
+    ],
+    "query": "Enable the monitoring and logging of network and internet performance by allowing the service to describe network and load balancer configurations, retrieve distribution details, and gather workspace directory information. Facilitate the creation and management of log groups and streams, as well as the submission of log events and metric data to track and analyze performance metrics effectively."
+  },
+  {
+    "policy_name": "AmazonEC2SpotFleetTaggingRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "iam:PassRole",
+      "ec2:CreateTags",
+      "ec2:TerminateInstances",
+      "ec2:RunInstances",
+      "ec2:RequestSpotInstances",
+      "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+      "ec2:DescribeImages",
+      "elasticloadbalancing:RegisterTargets",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "elasticloadbalancing",
+      "iam"
+    ],
+    "query": "Enable the ability to manage and operate spot instances by allowing the creation, termination, and tagging of instances. Facilitate the registration of instances with load balancers and target groups to ensure proper distribution of traffic. Provide the capability to describe instance statuses, images, and subnets to maintain and optimize the infrastructure."
+  },
+  {
+    "policy_name": "AWSEC2FleetServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "iam:PassRole",
+      "ec2:CreateTags",
+      "ec2:TerminateInstances",
+      "ec2:RunInstances",
+      "ec2:RequestSpotInstances",
+      "iam:CreateServiceLinkedRole",
+      "ec2:DescribeImages",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "iam"
+    ],
+    "query": "Enable the management and operation of virtual machine instances, including launching, tagging, and terminating instances, as well as requesting spot instances. Allow the retrieval of status information for instances and descriptions of available images and subnets. Ensure the capability to create necessary service-linked roles for seamless integration and operation."
+  },
+  {
+    "policy_name": "AWSResourceAccessManagerServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "organizations:ListRoots",
+      "organizations:ListAccountsForParent",
+      "organizations:DescribeAccount",
+      "organizations:DescribeOrganizationalUnit",
+      "organizations:ListParents",
+      "organizations:ListAccounts",
+      "iam:DeleteRole",
+      "organizations:ListChildren",
+      "organizations:DescribeOrganization",
+      "organizations:ListOrganizationalUnitsForParent"
+    ],
+    "services": [
+      "iam",
+      "organizations"
+    ],
+    "query": "Enable the service to manage and access organizational structures and account details within a multi-account setup. This includes listing and describing organizational units, accounts, and their hierarchical relationships, as well as the ability to delete roles as part of managing access and permissions."
+  },
+  {
+    "policy_name": "AmazonEC2RoleforAWSCodeDeploy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "s3:GetObjectVersion",
+      "s3:GetObject",
+      "s3:ListBucket"
+    ],
+    "services": [
+      "s3"
+    ],
+    "query": "Enable the retrieval and listing of application files stored in a storage service to facilitate deployment processes. This includes accessing specific versions of files and listing the contents of storage locations to ensure the correct resources are deployed."
+  },
+  {
+    "policy_name": "AmazonDMSCloudWatchLogsRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "logs"
+    ],
+    "query": "Enable the service to create and manage log groups and log streams, and to send log data to a logging service for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "AWSApplicationAutoscalingLambdaConcurrencyPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "lambda:DeleteProvisionedConcurrencyConfig",
+      "lambda:PutProvisionedConcurrencyConfig",
+      "lambda:GetProvisionedConcurrencyConfig",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm",
+      "cloudwatch:DeleteAlarms"
+    ],
+    "services": [
+      "cloudwatch",
+      "lambda"
+    ],
+    "query": "Enable the management of concurrency settings for serverless functions, including setting, updating, and deleting provisioned concurrency configurations. Additionally, allow the creation, updating, and deletion of monitoring alarms to track and manage the performance and scaling of these functions effectively."
+  },
+  {
+    "policy_name": "AmazonECSInfrastructureRolePolicyForVpcLattice",
+    "source": "aws_managed_dev",
+    "actions": [
+      "vpc-lattice:DeregisterTargets",
+      "ec2:DescribeVpcs",
+      "vpc-lattice:RegisterTargets",
+      "vpc-lattice:GetTargetGroup",
+      "ec2:DescribeInstances",
+      "vpc-lattice:ListTargets",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "vpc-lattice"
+    ],
+    "query": "Enable the management of target groups within a network infrastructure by allowing the registration and deregistration of targets. Additionally, provide the capability to retrieve information about virtual private clouds, instances, and subnets to facilitate effective target group configuration and management."
+  },
+  {
+    "policy_name": "AmazonECSInfrastructureRolePolicyForLoadBalancers",
+    "source": "aws_managed_dev",
+    "actions": [
+      "elasticloadbalancing:DescribeRules",
+      "elasticloadbalancing:DeregisterTargets",
+      "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:DescribeTargetHealth",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:ModifyRule",
+      "elasticloadbalancing:ModifyListener",
+      "elasticloadbalancing:RegisterTargets"
+    ],
+    "services": [
+      "elasticloadbalancing"
+    ],
+    "query": "Enable the management and configuration of load balancers by allowing the service to describe and modify rules, listeners, and target groups, as well as register and deregister targets to ensure proper traffic routing and health monitoring."
+  },
+  {
+    "policy_name": "AWSApplicationAutoscalingEC2SpotFleetRequestPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:ModifySpotFleetRequest",
+      "ec2:DescribeSpotFleetRequests",
+      "cloudwatch:DescribeAlarms",
+      "cloudwatch:PutMetricAlarm",
+      "cloudwatch:DeleteAlarms"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2"
+    ],
+    "query": "Enable the management and scaling of EC2 Spot Fleet requests by allowing the modification and description of these requests. Additionally, facilitate the monitoring and adjustment of resource usage by permitting the creation, description, and deletion of alarms to ensure optimal performance and cost-efficiency."
+  },
+  {
+    "policy_name": "AmazonBedrockReadOnly",
+    "source": "aws_managed_dev",
+    "actions": [
+      "sagemaker:DescribeEndpointConfig",
+      "sagemaker:DescribeEndpoint",
+      "sagemaker:ListTags",
+      "sagemaker:ListEndpoints",
+      "sagemaker:DescribeInferenceComponent",
+      "sagemaker:DescribeHubContent",
+      "sagemaker:ListHubContents",
+      "sagemaker:DescribeModel"
+    ],
+    "services": [
+      "sagemaker"
+    ],
+    "query": "Allow read-only access to retrieve detailed information about machine learning endpoints, models, and related components. This includes the ability to list and describe endpoints, models, inference components, and hub contents, as well as view associated tags."
+  },
+  {
+    "policy_name": "CloudFormationStackSetsOrgMemberServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:DeleteRole",
+      "iam:CreateRole",
+      "iam:AttachRolePolicy",
+      "iam:DetachRolePolicy",
+      "iam:GetRole"
+    ],
+    "services": [
+      "iam"
+    ],
+    "query": "Enable the management of roles within an organization by allowing the creation and deletion of roles, as well as attaching and detaching policies to these roles. Additionally, provide the ability to retrieve details of existing roles to ensure proper configuration and management."
+  },
+  {
+    "policy_name": "Ec2InstanceConnectEndpoint",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateTags",
+      "ec2:UnassignIpv6Addresses",
+      "ec2:ModifyNetworkInterfaceAttribute",
+      "ec2:DeleteNetworkInterface",
+      "ec2:AssignIpv6Addresses",
+      "ec2:DescribeAvailabilityZones",
+      "ec2:DescribeNetworkInterfaces",
+      "ec2:CreateNetworkInterface"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the management and configuration of network interfaces, including creating and deleting interfaces, modifying their attributes, and assigning or unassigning IPv6 addresses. Additionally, allow the tagging of resources and retrieval of information about network interfaces and availability zones to support connectivity and resource organization."
+  },
+  {
+    "policy_name": "CloudWatchActionsEC2Access",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:TerminateInstances",
+      "ec2:RebootInstances",
+      "ec2:StopInstances"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the ability to manage the lifecycle of virtual machine instances by allowing termination, rebooting, and stopping of these instances as part of automated monitoring and response actions."
+  },
+  {
+    "policy_name": "IAMSelfManageServiceSpecificCredentials",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:ListServiceSpecificCredentials",
+      "iam:UpdateServiceSpecificCredential",
+      "iam:DeleteServiceSpecificCredential",
+      "iam:CreateServiceSpecificCredential",
+      "iam:ResetServiceSpecificCredential"
+    ],
+    "services": [
+      "iam"
+    ],
+    "query": "Allow users to manage their own service-specific credentials by enabling them to list, update, delete, create, and reset these credentials as needed for their personal use. This ensures users can maintain and control their access credentials for specific services without requiring administrative intervention."
+  },
+  {
+    "policy_name": "AWSQuickSetupSSMManageResourcesExecutionPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:GetRolePolicy",
+      "s3:ListBucketVersions",
+      "s3:DeleteObject",
+      "iam:DeleteRole",
+      "iam:UpdateRole",
+      "s3:DeleteObjectVersion",
+      "iam:TagRole",
+      "s3:GetObjectVersion",
+      "s3:GetObject",
+      "iam:CreateRole",
+      "iam:AttachRolePolicy",
+      "iam:DetachRolePolicy",
+      "iam:GetRole"
+    ],
+    "services": [
+      "iam",
+      "s3"
+    ],
+    "query": "Enable the management and configuration of resources by allowing the creation, updating, tagging, and deletion of roles, as well as attaching and detaching policies to these roles. Additionally, provide the ability to list, retrieve, and delete specific versions of objects within storage buckets to ensure proper resource management and cleanup."
+  },
+  {
+    "policy_name": "AWSApplicationMigrationSSMAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ssm:ListDocuments",
+      "ssm:ListDocumentVersions",
+      "ssm:GetDocument",
+      "ssm:GetCommandInvocation",
+      "ssm:DescribeInstanceInformation",
+      "ssm:SendCommand",
+      "ssm:StartAutomationExecution",
+      "ssm:DescribeDocument"
+    ],
+    "services": [
+      "ssm"
+    ],
+    "query": "Enable the service to interact with system management resources by retrieving and executing documents, managing command invocations, and accessing instance information to facilitate application migration processes."
+  },
+  {
+    "policy_name": "AmazonAPIGatewayPushToCloudWatchLogs",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "logs:GetLogEvents",
+      "logs:CreateLogStream",
+      "logs:DescribeLogGroups",
+      "logs:DescribeLogStreams",
+      "logs:FilterLogEvents",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "logs"
+    ],
+    "query": "Enable the service to create and manage log groups and log streams, as well as to send, retrieve, and filter log events for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "AWS-SSM-Automation-DiagnosisBucketPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "s3:DeleteObject",
+      "s3:ListBucket",
+      "s3:GetObject",
+      "s3:GetEncryptionConfiguration",
+      "s3:PutObject"
+    ],
+    "services": [
+      "s3"
+    ],
+    "query": "Enable the service to manage objects within a specific storage bucket by allowing it to list, retrieve, upload, and delete objects. Additionally, allow the service to access the encryption configuration of the bucket to ensure secure handling of data."
+  },
+  {
+    "policy_name": "AmazonRDSEnhancedMonitoringRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "logs:GetLogEvents",
+      "logs:CreateLogStream",
+      "logs:PutRetentionPolicy",
+      "logs:DescribeLogStreams",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "logs"
+    ],
+    "query": "Enable the service to create and manage log groups and log streams, as well as to send, retrieve, and manage the retention of log data. This is necessary for monitoring and analyzing performance and operational data effectively."
+  },
+  {
+    "policy_name": "AWSQuickSetupSSMDeploymentS3BucketRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "s3:ListBucket",
+      "s3:PutLifecycleConfiguration",
+      "s3:PutBucketVersioning",
+      "s3:PutBucketPolicy",
+      "s3:PutBucketPublicAccessBlock",
+      "s3:PutBucketTagging",
+      "s3:DeleteBucketPolicy",
+      "s3:CreateBucket",
+      "s3:DeleteBucket",
+      "s3:PutEncryptionConfiguration"
+    ],
+    "services": [
+      "s3"
+    ],
+    "query": "Enable the creation, configuration, and management of storage buckets, including setting lifecycle rules, versioning, access policies, public access settings, tagging, and encryption. Additionally, allow the listing of bucket contents and the deletion of buckets and their policies as needed."
+  },
+  {
+    "policy_name": "AWSEC2CapacityReservationFleetRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:CreateCapacityReservation",
+      "ec2:CreateTags",
+      "ec2:CancelCapacityReservation",
+      "ec2:DescribeInstances",
+      "ec2:DescribeCapacityReservations",
+      "ec2:ModifyCapacityReservation"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the management of capacity reservations by allowing the creation, modification, and cancellation of capacity reservations. Additionally, allow the tagging of these reservations and the ability to describe both instances and capacity reservations to ensure proper tracking and utilization of resources."
+  },
+  {
+    "policy_name": "AWSApplicationAutoscalingDynamoDBTablePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "cloudwatch:PutMetricAlarm",
+      "dynamodb:DescribeTable",
+      "cloudwatch:DescribeAlarms",
+      "dynamodb:UpdateTable",
+      "cloudwatch:DeleteAlarms"
+    ],
+    "services": [
+      "cloudwatch",
+      "dynamodb"
+    ],
+    "query": "Enable the ability to manage the scaling of database tables by allowing the creation, modification, and deletion of monitoring alarms, as well as the ability to describe and update the configuration of the tables."
+  },
+  {
+    "policy_name": "AmazonMQReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeSecurityGroups",
+      "ec2:DescribeVpcs",
+      "ec2:DescribeSubnets",
+      "ec2:DescribeNetworkInterfaces"
+    ],
+    "services": [
+      "ec2"
+    ],
+    "query": "Enable the ability to view and retrieve information about security groups, VPCs, subnets, and network interfaces for monitoring and auditing purposes without making any modifications."
+  },
+  {
+    "policy_name": "CloudWatchEventsServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "ec2:TerminateInstances",
+      "ec2:CreateSnapshot",
+      "ec2:RebootInstances",
+      "ec2:StopInstances",
+      "ec2:DescribeSnapshots",
+      "cloudwatch:DescribeAlarms",
+      "ec2:DescribeInstances",
+      "ec2:DescribeVolumes",
+      "ec2:DescribeVolumeStatus"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2"
+    ],
+    "query": "Enable the service to monitor and manage the lifecycle of virtual machine instances by allowing it to retrieve status information, terminate, reboot, and stop instances as necessary. Additionally, allow the service to create and describe snapshots of storage volumes, and access alarm information to ensure effective monitoring and operational management of resources."
+  },
+  {
+    "policy_name": "AWSElasticBeanstalkRoleECS",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ecs:TagResource",
+      "ecs:RegisterTaskDefinition",
+      "ecs:CreateCluster",
+      "ecs:DeleteCluster",
+      "ecs:DeRegisterTaskDefinition"
+    ],
+    "services": [
+      "ecs"
+    ],
+    "query": "Enable the management of containerized applications by allowing the creation and deletion of clusters, as well as the registration and deregistration of task definitions. Additionally, allow tagging of resources to organize and manage them effectively."
+  },
+  {
+    "policy_name": "AmazonDocDBElasticReadOnlyAccess",
+    "source": "aws_managed_dev",
+    "actions": [
+      "docdb-elastic:ListTagsForResource",
+      "docdb-elastic:GetCluster",
+      "cloudwatch:GetMetricStatistics",
+      "cloudwatch:GetMetricData",
+      "docdb-elastic:ListClusters",
+      "cloudwatch:ListMetrics",
+      "docdb-elastic:ListClusterSnapshots",
+      "docdb-elastic:GetClusterSnapshot"
+    ],
+    "services": [
+      "cloudwatch",
+      "docdb-elastic"
+    ],
+    "query": "Allow read-only access to retrieve information about database clusters and their snapshots, including listing clusters, getting cluster details, and accessing cluster snapshots. Additionally, enable the retrieval of monitoring data and metrics related to these clusters to facilitate performance analysis and monitoring."
+  },
+  {
+    "policy_name": "CloudWatchAgentAdminPolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "xray:GetSamplingRules",
+      "xray:PutTelemetryRecords",
+      "logs:PutLogEvents",
+      "ec2:DescribeTags",
+      "logs:CreateLogStream",
+      "xray:GetSamplingStatisticSummaries",
+      "cloudwatch:PutMetricData",
+      "logs:PutRetentionPolicy",
+      "logs:DescribeLogGroups",
+      "xray:PutTraceSegments",
+      "logs:DescribeLogStreams",
+      "xray:GetSamplingTargets",
+      "ssm:PutParameter",
+      "ssm:GetParameter",
+      "logs:CreateLogGroup"
+    ],
+    "services": [
+      "cloudwatch",
+      "ec2",
+      "logs",
+      "ssm",
+      "xray"
+    ],
+    "query": "Enable the monitoring and logging of application performance and system metrics by allowing the creation and management of log groups and streams, sending log events, and setting retention policies. Facilitate the collection and submission of telemetry data and trace segments for performance analysis and troubleshooting. Retrieve and store configuration parameters necessary for monitoring setup and ensure the ability to describe resource tags for better organization and management."
+  },
+  {
+    "policy_name": "AWSEC2SpotFleetServiceRolePolicy",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "iam:PassRole",
+      "ec2:CreateTags",
+      "ec2:TerminateInstances",
+      "ec2:RunInstances",
+      "ec2:RequestSpotInstances",
+      "elasticloadbalancing:RegisterInstancesWithLoadBalancer",
+      "ec2:DescribeImages",
+      "elasticloadbalancing:RegisterTargets",
+      "ec2:DescribeSubnets"
+    ],
+    "services": [
+      "ec2",
+      "elasticloadbalancing",
+      "iam"
+    ],
+    "query": "Enable the management and operation of spot fleet instances by allowing the initiation, termination, and tagging of instances, as well as the ability to request spot instances. Facilitate the integration of these instances with load balancers by registering them as targets. Additionally, allow the retrieval of necessary information about instance statuses, available images, and subnets to support these operations."
+  },
+  {
+    "policy_name": "CloudWatchCrossAccountSharingConfiguration",
+    "source": "aws_managed_dev",
+    "actions": [
+      "oam:ListLinks",
+      "oam:CreateLink",
+      "oam:TagResource",
+      "cloudwatch:Link",
+      "oam:UpdateLink",
+      "oam:GetLink",
+      "oam:DeleteLink"
+    ],
+    "services": [
+      "cloudwatch",
+      "oam"
+    ],
+    "query": "Enable the configuration and management of cross-account sharing by allowing the creation, updating, listing, tagging, and deletion of links for monitoring and observability purposes. This facilitates the integration and sharing of monitoring data across different accounts."
+  },
+  {
+    "policy_name": "AWSLambdaBasicExecutionRole",
+    "source": "aws_managed_dev",
+    "actions": [
+      "logs:PutLogEvents",
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream"
+    ],
+    "services": [
+      "logs"
+    ],
+    "query": "Enable the service to create and manage log groups and log streams, and to publish log events for monitoring and troubleshooting purposes."
+  },
+  {
+    "policy_name": "IAMUserSSHKeys",
+    "source": "aws_managed_dev",
+    "actions": [
+      "iam:ListSSHPublicKeys",
+      "iam:DeleteSSHPublicKey",
+      "iam:GetSSHPublicKey",
+      "iam:UpdateSSHPublicKey",
+      "iam:UploadSSHPublicKey"
+    ],
+    "services": [
+      "iam"
+    ],
+    "query": "Enable the management of SSH public keys for user authentication by allowing the listing, uploading, retrieval, updating, and deletion of SSH public keys associated with user accounts."
+  },
+  {
+    "policy_name": "AWSBudgetsActions_RolePolicyForResourceAdministrationWithSSM",
+    "source": "aws_managed_dev",
+    "actions": [
+      "ec2:DescribeInstanceStatus",
+      "rds:DescribeDBInstances",
+      "ec2:StopInstances",
+      "ssm:StartAutomationExecution",
+      "ec2:StartInstances",
+      "rds:StopDBInstance",
+      "rds:StartDBInstance"
+    ],
+    "services": [
+      "ec2",
+      "rds",
+      "ssm"
+    ],
+    "query": "Enable the management of compute and database resources by allowing the ability to start and stop instances and databases as needed. Additionally, allow the execution of automation tasks to facilitate resource administration and ensure the ability to check the status of compute instances for monitoring purposes."
+  }
+]
