@@ -195,7 +195,7 @@ Since standard RAG metrics (Recall@K, MRR) are insufficient for IAM policy synth
 ## Retrieval Strategy Ablation
 
 | Strategy | Recall | Precision | F1 | Perfect-Recall | Zero-Recall |
-|---|---|---|---|---|
+|---|---|---|---|---|---|
 | **Decomposed (selected)** | **0.574** | **0.426** | **0.489** | 16/100 | 4/100 |
 | Decomposed Hybrid | 0.556 | 0.404 | 0.468 | 16/100 | 6/100 |
 | Dense | 0.538 | 0.341 | 0.417 | 18/100 | 11/100 |
